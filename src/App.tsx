@@ -8,6 +8,7 @@ import type {
 } from './types/study'
 
 const quizSizeOptions = [5, 10, 15]
+type QuizFeedbackMode = 'afterAll' | 'perQuestion'
 
 function App() {
   const defaultQuizSize = Math.min(10, quizQuestions.length)
@@ -15,10 +16,16 @@ function App() {
   const [selectedModuleId, setSelectedModuleId] = useState(studyModules[0].id)
   const [quizModuleId, setQuizModuleId] = useState<string | 'all'>('all')
   const [quizSize, setQuizSize] = useState(defaultQuizSize)
+  const [quizFeedbackMode, setQuizFeedbackMode] =
+    useState<QuizFeedbackMode>('afterAll')
+  const [pendingQuizModuleId, setPendingQuizModuleId] = useState<string | 'all' | null>(
+    null,
+  )
   const [quizAttempt, setQuizAttempt] = useState<QuizAttemptQuestion[]>(() =>
     createDistinctQuizAttempt('all', defaultQuizSize),
   )
   const [answers, setAnswers] = useState<Record<string, string>>({})
+  const [revealedAnswers, setRevealedAnswers] = useState<Record<string, boolean>>({})
   const [submitted, setSubmitted] = useState(false)
 
   const selectedModule = useMemo(
@@ -34,21 +41,29 @@ function App() {
   const activeQuizSizeOptions = useMemo(() => {
     return quizSizeOptions.filter((size) => size < activePool.length)
   }, [activePool.length])
+  const isPerQuestionMode = quizFeedbackMode === 'perQuestion'
 
   const unanswered = quizAttempt.length - Object.keys(answers).length
   const score = quizAttempt.reduce((accumulator, question) => {
     return answers[question.id] === question.correctOptionId ? accumulator + 1 : accumulator
   }, 0)
 
-  const startQuiz = (moduleId: string | 'all') => {
+  const openQuizSetup = (moduleId: string | 'all') => {
+    setPendingQuizModuleId(moduleId)
+  }
+
+  const startQuiz = (moduleId: string | 'all', feedbackMode = quizFeedbackMode) => {
     const nextPool = getQuestionPool(moduleId)
     const nextQuizSize = Math.min(quizSize, nextPool.length)
     const nextAttempt = createDistinctQuizAttempt(moduleId, nextQuizSize, quizAttempt)
     setQuizModuleId(moduleId)
     setQuizSize(nextQuizSize)
+    setQuizFeedbackMode(feedbackMode)
     setQuizAttempt(nextAttempt)
     setAnswers({})
+    setRevealedAnswers({})
     setSubmitted(false)
+    setPendingQuizModuleId(null)
     setMode('quiz')
   }
 
@@ -58,11 +73,12 @@ function App() {
     setQuizSize(safeQuizSize)
     setQuizAttempt(nextAttempt)
     setAnswers({})
+    setRevealedAnswers({})
     setSubmitted(false)
   }
 
   const handleAnswerChange = (questionId: string, optionId: string) => {
-    if (submitted) {
+    if (submitted || revealedAnswers[questionId]) {
       return
     }
 
@@ -70,6 +86,13 @@ function App() {
       ...current,
       [questionId]: optionId,
     }))
+
+    if (isPerQuestionMode) {
+      setRevealedAnswers((current) => ({
+        ...current,
+        [questionId]: true,
+      }))
+    }
   }
 
   return (
@@ -117,7 +140,7 @@ function App() {
               </button>
               <button
                 type="button"
-                onClick={() => startQuiz('all')}
+                onClick={() => openQuizSetup('all')}
                 className={getNavButtonClass(mode === 'quiz')}
               >
                 Hacer examen random
@@ -239,13 +262,13 @@ function App() {
                         Posibles preguntas de este módulo
                       </h3>
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => startQuiz(selectedModule.id)}
-                      className="w-full rounded-full bg-amber-300 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-amber-200 sm:w-auto"
-                    >
-                      Probarme en este módulo
-                    </button>
+                      <button
+                        type="button"
+                        onClick={() => openQuizSetup(selectedModule.id)}
+                        className="w-full rounded-full bg-amber-300 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-amber-200 sm:w-auto"
+                      >
+                        Probarme en este módulo
+                      </button>
                   </div>
 
                   <div className="mt-5 grid gap-4">
@@ -287,8 +310,8 @@ function App() {
                     </h2>
                     <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300">
                       Cada intento mezcla preguntas y respuestas para que la práctica
-                      no salga igual. Elegí una opción por consigna y corregí cuando
-                      quieras.
+                      no salga igual. Además podés elegir si querés corregir todo al
+                      final o recibir validación una por una mientras respondés.
                     </p>
                   </div>
 
@@ -314,14 +337,14 @@ function App() {
                     </label>
                     <button
                       type="button"
-                      onClick={() => startQuiz(quizModuleId)}
+                      onClick={() => openQuizSetup(quizModuleId)}
                       className="w-full rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-white transition hover:border-cyan-200 hover:text-cyan-100 lg:w-auto"
                     >
                       Generar otro examen
                     </button>
                     <button
                       type="button"
-                      onClick={() => startQuiz('all')}
+                      onClick={() => openQuizSetup('all')}
                       className="w-full rounded-full bg-white px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-cyan-200 lg:w-auto"
                     >
                       Mezclar todos los módulos
@@ -336,7 +359,15 @@ function App() {
                   <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">
                     Sin responder: {submitted ? 0 : unanswered}
                   </span>
+                  <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">
+                    Corrección: {isPerQuestionMode ? 'una por una' : 'al final'}
+                  </span>
                   {submitted ? (
+                    <span className="rounded-full border border-emerald-300/25 bg-emerald-300/10 px-4 py-2 text-emerald-100">
+                      Puntaje: {score}/{quizAttempt.length}
+                    </span>
+                  ) : null}
+                  {isPerQuestionMode && Object.keys(revealedAnswers).length === quizAttempt.length ? (
                     <span className="rounded-full border border-emerald-300/25 bg-emerald-300/10 px-4 py-2 text-emerald-100">
                       Puntaje: {score}/{quizAttempt.length}
                     </span>
@@ -350,6 +381,9 @@ function App() {
                     const selectedOption = question.options.find(
                       (option) => option.id === selectedOptionId,
                     )
+                    const isQuestionRevealed = isPerQuestionMode
+                      ? Boolean(revealedAnswers[question.id])
+                      : submitted
 
                     return (
                       <article
@@ -366,8 +400,12 @@ function App() {
                         <div className="mt-4 grid gap-3">
                           {question.options.map((option) => {
                             const checked = selectedOptionId === option.id
-                            const showCorrect = submitted && option.id === question.correctOptionId
-                            const showIncorrect = submitted && checked && option.id !== question.correctOptionId
+                            const showCorrect =
+                              isQuestionRevealed && option.id === question.correctOptionId
+                            const showIncorrect =
+                              isQuestionRevealed &&
+                              checked &&
+                              option.id !== question.correctOptionId
 
                             return (
                               <label
@@ -388,7 +426,7 @@ function App() {
                                     name={question.id}
                                     value={option.id}
                                     checked={checked}
-                                    disabled={submitted}
+                                    disabled={isQuestionRevealed}
                                     onChange={() => handleAnswerChange(question.id, option.id)}
                                     className="peer sr-only"
                                   />
@@ -416,21 +454,21 @@ function App() {
                                       }`}
                                     />
                                   </span>
-                                  <div className="flex-1">
-                                    <p className="font-medium text-white">{option.text}</p>
-                                    {submitted ? (
+                                    <div className="flex-1">
+                                      <p className="font-medium text-white">{option.text}</p>
+                                      {isQuestionRevealed ? (
                                       <p className="mt-2 text-sm leading-6 text-slate-300">
                                         {option.explanation}
                                       </p>
-                                    ) : null}
-                                  </div>
+                                      ) : null}
+                                    </div>
                                 </div>
                               </label>
                             )
                           })}
                         </div>
 
-                        {submitted && selectedOption ? (
+                        {isQuestionRevealed && selectedOption ? (
                           <div
                             className={`mt-4 rounded-2xl border p-4 text-sm leading-6 ${
                               isCorrect
@@ -454,14 +492,16 @@ function App() {
                 </div>
 
                 <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                  <button
-                    type="button"
-                    disabled={submitted || unanswered > 0}
-                    onClick={() => setSubmitted(true)}
-                    className="w-full rounded-full bg-emerald-300 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-emerald-200 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400 sm:w-auto"
-                  >
-                    Corregir examen
-                  </button>
+                  {!isPerQuestionMode ? (
+                    <button
+                      type="button"
+                      disabled={submitted || unanswered > 0}
+                      onClick={() => setSubmitted(true)}
+                      className="w-full rounded-full bg-emerald-300 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-emerald-200 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400 sm:w-auto"
+                    >
+                      Corregir examen
+                    </button>
+                  ) : null}
                   {submitted ? (
                     <button
                       type="button"
@@ -472,7 +512,9 @@ function App() {
                     </button>
                   ) : (
                     <p className="self-center text-sm text-slate-400">
-                      Respondé todo para habilitar la corrección.
+                      {isPerQuestionMode
+                        ? 'Cada respuesta se valida apenas la marcás.'
+                        : 'Respondé todo para habilitar la corrección.'}
                     </p>
                   )}
                 </div>
@@ -481,6 +523,109 @@ function App() {
           ) : null}
         </section>
       </div>
+
+      {pendingQuizModuleId !== null ? (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/75 px-4 backdrop-blur-sm">
+          <div className="w-full max-w-2xl rounded-[1.75rem] border border-white/10 bg-slate-900 p-6 shadow-2xl shadow-slate-950/40">
+            <p className="text-xs uppercase tracking-[0.24em] text-cyan-200">
+              Antes de arrancar
+            </p>
+            <h2 className="mt-3 text-2xl font-black text-white sm:text-3xl">
+              ¿Cómo querés corregir este examen?
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-slate-300">
+              {pendingQuizModuleId === 'all'
+                ? 'Vas a hacer un examen mixto con preguntas de todos los módulos.'
+                : `Vas a hacer un examen sobre ${
+                    studyModules.find((module) => module.id === pendingQuizModuleId)?.title
+                  }.`}{' '}
+              Elegí si preferís corregir todo al final o validar una por una mientras contestás.
+            </p>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <button
+                type="button"
+                onClick={() => setQuizFeedbackMode('afterAll')}
+                className={`rounded-[1.5rem] border p-5 text-left transition ${
+                  quizFeedbackMode === 'afterAll'
+                    ? 'border-cyan-300/45 bg-cyan-300/10'
+                    : 'border-white/10 bg-white/5 hover:border-white/20'
+                }`}
+              >
+                <p className="text-lg font-bold text-white">Corregir al final</p>
+                <p className="mt-2 text-sm leading-6 text-slate-300">
+                  Respondés todo y recién después ves aciertos, errores y explicación completa.
+                </p>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setQuizFeedbackMode('perQuestion')}
+                className={`rounded-[1.5rem] border p-5 text-left transition ${
+                  quizFeedbackMode === 'perQuestion'
+                    ? 'border-cyan-300/45 bg-cyan-300/10'
+                    : 'border-white/10 bg-white/5 hover:border-white/20'
+                }`}
+              >
+                <p className="text-lg font-bold text-white">Validar una por una</p>
+                <p className="mt-2 text-sm leading-6 text-slate-300">
+                  Cada vez que marcás una opción, se corrige en el momento y te explica qué pasó.
+                </p>
+              </button>
+            </div>
+
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-end">
+              <button
+                type="button"
+                onClick={() => setPendingQuizModuleId(null)}
+                className="w-full rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/5 sm:w-auto"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                onClick={() => startQuiz(pendingQuizModuleId, quizFeedbackMode)}
+                className="w-full rounded-full bg-cyan-300 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-cyan-200 sm:w-auto"
+              >
+                Empezar examen
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      <footer className="border-t border-white/10 bg-slate-950/70">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-6 text-sm text-slate-300 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+          <div>
+            <p className="font-semibold text-white">Preparador TICs</p>
+            <p className="mt-1 text-slate-400">
+              Proyecto en evolución: más adelante va a convertirse en una app para
+              preparar múltiples materias.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <a
+              href="https://github.com/facuCarbon"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-white transition hover:border-white/25 hover:bg-white/10"
+            >
+              <GitHubIcon />
+              <span>GitHub</span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/facundocarbon/"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-white transition hover:border-white/25 hover:bg-white/10"
+            >
+              <LinkedInIcon />
+              <span>LinkedIn</span>
+            </a>
+          </div>
+        </div>
+      </footer>
     </main>
   )
 }
@@ -516,6 +661,30 @@ function StudyCard({ title, items }: { title: string; items: string[] }) {
         ))}
       </div>
     </section>
+  )
+}
+
+function GitHubIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className="h-5 w-5 fill-current"
+    >
+      <path d="M12 2C6.48 2 2 6.59 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.66-.22.66-.49 0-.24-.01-1.03-.01-1.86-2.78.62-3.37-1.22-3.37-1.22-.45-1.2-1.11-1.52-1.11-1.52-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.56 2.35 1.11 2.92.85.09-.67.35-1.11.63-1.37-2.22-.26-4.56-1.15-4.56-5.1 0-1.13.39-2.05 1.03-2.77-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.06A9.3 9.3 0 0 1 12 6.83c.85 0 1.7.12 2.5.35 1.91-1.33 2.75-1.06 2.75-1.06.55 1.42.2 2.47.1 2.73.64.72 1.03 1.64 1.03 2.77 0 3.96-2.35 4.83-4.59 5.09.36.32.69.95.69 1.92 0 1.39-.01 2.5-.01 2.84 0 .27.18.6.67.49A10.27 10.27 0 0 0 22 12.25C22 6.59 17.52 2 12 2Z" />
+    </svg>
+  )
+}
+
+function LinkedInIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className="h-5 w-5 fill-current"
+    >
+      <path d="M6.94 8.5H3.56V19h3.38V8.5ZM5.25 3C4.17 3 3.5 3.72 3.5 4.67c0 .93.65 1.67 1.7 1.67h.02c1.1 0 1.77-.74 1.77-1.67C6.97 3.72 6.35 3 5.25 3ZM20.5 12.62c0-3.22-1.72-4.72-4.02-4.72-1.86 0-2.68 1.04-3.15 1.77V8.5H9.95c.05.78 0 10.5 0 10.5h3.38v-5.86c0-.31.02-.62.11-.84.24-.62.8-1.26 1.73-1.26 1.22 0 1.7.95 1.7 2.33V19H20.5v-6.38Z" />
+    </svg>
   )
 }
 
