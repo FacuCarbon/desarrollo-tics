@@ -1,5 +1,4 @@
-import { quizQuestions } from '../data/ticsContent'
-import type { QuizAttemptQuestion } from '../types/study'
+import type { QuizAttemptQuestion, QuizQuestion } from '../types/study'
 
 function shuffleArray<T>(items: T[]) {
   const cloned = [...items]
@@ -14,11 +13,12 @@ function shuffleArray<T>(items: T[]) {
   return cloned
 }
 
-export function createQuizAttempt(moduleId: string | 'all', amount = 5) {
-  const pool =
-    moduleId === 'all'
-      ? quizQuestions
-      : quizQuestions.filter((question) => question.moduleId === moduleId)
+export function createQuizAttempt(
+  questions: QuizQuestion[],
+  moduleId: string | 'all',
+  amount = 5,
+) {
+  const pool = getQuestionPool(questions, moduleId)
 
   return shuffleArray(pool)
     .slice(0, Math.min(amount, pool.length))
@@ -28,22 +28,23 @@ export function createQuizAttempt(moduleId: string | 'all', amount = 5) {
     }))
 }
 
-export function getQuestionPool(moduleId: string | 'all') {
+export function getQuestionPool(questions: QuizQuestion[], moduleId: string | 'all') {
   return moduleId === 'all'
-    ? quizQuestions
-    : quizQuestions.filter((question) => question.moduleId === moduleId)
+    ? questions
+    : questions.filter((question) => question.moduleId === moduleId)
 }
 
 export function createDistinctQuizAttempt(
+  questions: QuizQuestion[],
   moduleId: string | 'all',
   amount = 5,
   previousAttempt: QuizAttemptQuestion[] = [],
 ) {
-  const pool = getQuestionPool(moduleId)
+  const pool = getQuestionPool(questions, moduleId)
   const maxQuestions = Math.min(amount, pool.length)
 
   if (pool.length <= 1 || previousAttempt.length === 0) {
-    return createQuizAttempt(moduleId, amount)
+    return createQuizAttempt(questions, moduleId, amount)
   }
 
   const previousSignature = previousAttempt
@@ -52,7 +53,7 @@ export function createDistinctQuizAttempt(
     .join('|')
 
   for (let attempt = 0; attempt < 6; attempt += 1) {
-    const nextAttempt = createQuizAttempt(moduleId, amount)
+    const nextAttempt = createQuizAttempt(questions, moduleId, amount)
     const nextSignature = nextAttempt
       .map((question) => `${question.id}:${question.options.map((option) => option.id).join('')}`)
       .join('|')
@@ -62,5 +63,5 @@ export function createDistinctQuizAttempt(
     }
   }
 
-  return createQuizAttempt(moduleId, amount)
+  return createQuizAttempt(questions, moduleId, amount)
 }

@@ -1,61 +1,164 @@
-import { useMemo, useState } from 'react'
-import { quizQuestions, studyModules } from './data/ticsContent'
+import { useEffect, useMemo, useState } from 'react'
+import { studySubjects } from './data/subjects'
 import { createDistinctQuizAttempt, getQuestionPool } from './lib/quiz'
 import type {
   QuestionOption,
   QuizAttemptQuestion,
   StudyMode,
+  StudySubject,
 } from './types/study'
 
 const quizSizeOptions = [5, 10, 15]
 type QuizFeedbackMode = 'afterAll' | 'perQuestion'
+const selectedSubjectStorageKey = 'study-subject-id'
 
 function App() {
-  const defaultQuizSize = Math.min(10, quizQuestions.length)
   const [mode, setMode] = useState<StudyMode>('home')
-  const [selectedModuleId, setSelectedModuleId] = useState(studyModules[0].id)
+  const [selectedSubjectId, setSelectedSubjectId] = useState<string | null>(() => {
+    if (typeof window === 'undefined') {
+      return null
+    }
+
+    return window.sessionStorage.getItem(selectedSubjectStorageKey)
+  })
+  const [isSubjectPickerOpen, setIsSubjectPickerOpen] = useState(() => {
+    if (typeof window === 'undefined') {
+      return true
+    }
+
+    return !window.sessionStorage.getItem(selectedSubjectStorageKey)
+  })
+  const [selectedModuleId, setSelectedModuleId] = useState('')
   const [quizModuleId, setQuizModuleId] = useState<string | 'all'>('all')
-  const [quizSize, setQuizSize] = useState(defaultQuizSize)
+  const [quizSize, setQuizSize] = useState(5)
   const [quizFeedbackMode, setQuizFeedbackMode] =
     useState<QuizFeedbackMode>('afterAll')
   const [pendingQuizModuleId, setPendingQuizModuleId] = useState<string | 'all' | null>(
     null,
   )
-  const [quizAttempt, setQuizAttempt] = useState<QuizAttemptQuestion[]>(() =>
-    createDistinctQuizAttempt('all', defaultQuizSize),
-  )
+  const [quizAttempt, setQuizAttempt] = useState<QuizAttemptQuestion[]>([])
   const [answers, setAnswers] = useState<Record<string, string>>({})
   const [revealedAnswers, setRevealedAnswers] = useState<Record<string, boolean>>({})
   const [submitted, setSubmitted] = useState(false)
 
-  const selectedModule = useMemo(
-    () => studyModules.find((module) => module.id === selectedModuleId) ?? studyModules[0],
-    [selectedModuleId],
+  const selectedSubject = useMemo(
+    () => studySubjects.find((subject) => subject.id === selectedSubjectId) ?? null,
+    [selectedSubjectId],
   )
 
-  const moduleQuestions = useMemo(
-    () => quizQuestions.filter((question) => question.moduleId === selectedModule.id),
-    [selectedModule.id],
-  )
-  const activePool = useMemo(() => getQuestionPool(quizModuleId), [quizModuleId])
+  const selectedModule = useMemo(() => {
+    if (!selectedSubject) {
+      return null
+    }
+
+    return (
+      selectedSubject.modules.find((module) => module.id === selectedModuleId) ??
+      selectedSubject.modules[0] ??
+      null
+    )
+  }, [selectedModuleId, selectedSubject])
+
+  const moduleQuestions = useMemo(() => {
+    if (!selectedSubject || !selectedModule) {
+      return []
+    }
+
+    return selectedSubject.questions.filter(
+      (question) => question.moduleId === selectedModule.id,
+    )
+  }, [selectedModule, selectedSubject])
+
+  const activePool = useMemo(() => {
+    if (!selectedSubject) {
+      return []
+    }
+
+    return getQuestionPool(selectedSubject.questions, quizModuleId)
+  }, [quizModuleId, selectedSubject])
+
   const activeQuizSizeOptions = useMemo(() => {
     return quizSizeOptions.filter((size) => size < activePool.length)
   }, [activePool.length])
-  const isPerQuestionMode = quizFeedbackMode === 'perQuestion'
 
+  const isPerQuestionMode = quizFeedbackMode === 'perQuestion'
   const unanswered = quizAttempt.length - Object.keys(answers).length
   const score = quizAttempt.reduce((accumulator, question) => {
     return answers[question.id] === question.correctOptionId ? accumulator + 1 : accumulator
   }, 0)
 
+  useEffect(() => {
+    if (!selectedSubjectId) {
+      return
+    }
+
+    const nextSubject = studySubjects.find((subject) => subject.id === selectedSubjectId)
+
+    if (!nextSubject) {
+      window.sessionStorage.removeItem(selectedSubjectStorageKey)
+      return
+    }
+
+    const firstModuleId = nextSubject.modules[0]?.id ?? ''
+    const defaultQuizSize = Math.min(10, nextSubject.questions.length)
+
+    setSelectedModuleId((current) => current || firstModuleId)
+    setQuizSize((current) => (current > 0 ? current : defaultQuizSize))
+    setQuizAttempt((current) =>
+      current.length > 0
+        ? current
+        : createDistinctQuizAttempt(nextSubject.questions, 'all', defaultQuizSize),
+    )
+  }, [selectedSubjectId])
+
+  const activateSubject = (subjectId: string, nextMode: StudyMode = 'home') => {
+    const nextSubject = studySubjects.find((subject) => subject.id === subjectId)
+
+    if (!nextSubject) {
+      return
+    }
+
+    const firstModuleId = nextSubject.modules[0]?.id ?? ''
+    const defaultQuizSize = Math.min(10, nextSubject.questions.length)
+
+    setSelectedSubjectId(nextSubject.id)
+    window.sessionStorage.setItem(selectedSubjectStorageKey, nextSubject.id)
+    setSelectedModuleId(firstModuleId)
+    setQuizModuleId('all')
+    setQuizSize(defaultQuizSize)
+    setQuizFeedbackMode('afterAll')
+    setPendingQuizModuleId(null)
+    setQuizAttempt(
+      createDistinctQuizAttempt(nextSubject.questions, 'all', defaultQuizSize),
+    )
+    setAnswers({})
+    setRevealedAnswers({})
+    setSubmitted(false)
+    setIsSubjectPickerOpen(false)
+    setMode(nextMode)
+  }
+
   const openQuizSetup = (moduleId: string | 'all') => {
+    if (!selectedSubject) {
+      return
+    }
+
     setPendingQuizModuleId(moduleId)
   }
 
   const startQuiz = (moduleId: string | 'all', feedbackMode = quizFeedbackMode) => {
-    const nextPool = getQuestionPool(moduleId)
+    if (!selectedSubject) {
+      return
+    }
+
+    const nextPool = getQuestionPool(selectedSubject.questions, moduleId)
     const nextQuizSize = Math.min(quizSize, nextPool.length)
-    const nextAttempt = createDistinctQuizAttempt(moduleId, nextQuizSize, quizAttempt)
+    const nextAttempt = createDistinctQuizAttempt(
+      selectedSubject.questions,
+      moduleId,
+      nextQuizSize,
+      quizAttempt,
+    )
+
     setQuizModuleId(moduleId)
     setQuizSize(nextQuizSize)
     setQuizFeedbackMode(feedbackMode)
@@ -68,8 +171,18 @@ function App() {
   }
 
   const updateQuizSize = (nextSize: number) => {
+    if (!selectedSubject) {
+      return
+    }
+
     const safeQuizSize = Math.min(nextSize, activePool.length)
-    const nextAttempt = createDistinctQuizAttempt(quizModuleId, safeQuizSize, quizAttempt)
+    const nextAttempt = createDistinctQuizAttempt(
+      selectedSubject.questions,
+      quizModuleId,
+      safeQuizSize,
+      quizAttempt,
+    )
+
     setQuizSize(safeQuizSize)
     setQuizAttempt(nextAttempt)
     setAnswers({})
@@ -97,30 +210,36 @@ function App() {
 
   return (
     <main className="min-h-screen bg-[radial-gradient(circle_at_top,#1d4ed8_0%,#0f172a_38%,#020617_100%)] text-slate-100">
-      <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto flex min-h-screen w-full max-w-[1500px] flex-col px-3 py-6 sm:px-4 lg:px-5">
         <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/6 shadow-2xl shadow-slate-950/30 backdrop-blur">
           <div className="border-b border-white/10 px-6 py-6 sm:px-8">
             <div className="mb-5 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-3xl">
                 <p className="mb-3 inline-flex rounded-full border border-cyan-300/30 bg-cyan-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-cyan-100">
-                  Preparador TICs
+                  {selectedSubject ? `Preparador ${selectedSubject.shortLabel}` : 'Preparador de parciales'}
                 </p>
                 <h1 className="max-w-3xl text-4xl font-black tracking-tight text-white sm:text-5xl">
-                  Modo estudio + modo parcial con preguntas aleatorias
+                  {selectedSubject
+                    ? `${selectedSubject.title}: teoría + mini exámenes explicados`
+                    : 'Elegí si querés estudiar TICs o Mobile + Frontend'}
                 </h1>
                 <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base">
-                  Preparado sobre el resumen de TIC, redes, protocolos y Linux, más
-                  los dos temas aislados que marcó el profe: configuración de red y
-                  ejercicio de comandos. Si responde mal, explicamos el error; si
-                  responde bien, profundizamos para que no se quede solo con memoria.
+                  {selectedSubject
+                    ? selectedSubject.description
+                    : 'El proyecto ahora arranca preguntando qué materia querés preparar. Después reutiliza el mismo formato: módulos para estudiar, preguntas guiadas y simulaciones con corrección explicada.'}
                 </p>
               </div>
 
-              <div className="grid gap-3 rounded-3xl border border-white/10 bg-slate-950/30 p-4 text-sm text-slate-200 sm:grid-cols-3 lg:w-[26rem] lg:grid-cols-1">
-                <MetricCard label="Módulos" value={String(studyModules.length)} />
-                <MetricCard label="Preguntas cargadas" value={String(quizQuestions.length)} />
-                <MetricCard label="Examen actual" value={`${quizSize} preguntas random`} />
-              </div>
+              {selectedSubject ? (
+                <div className="grid gap-3 rounded-3xl border border-white/10 bg-slate-950/30 p-4 text-sm text-slate-200 sm:grid-cols-3 lg:w-[26rem] lg:grid-cols-1">
+                  <MetricCard label="Módulos" value={String(selectedSubject.modules.length)} />
+                  <MetricCard
+                    label="Preguntas cargadas"
+                    value={String(selectedSubject.questions.length)}
+                  />
+                  <MetricCard label="Examen actual" value={`${quizSize} preguntas random`} />
+                </div>
+              ) : null}
             </div>
 
             <nav className="flex flex-wrap gap-3">
@@ -131,27 +250,47 @@ function App() {
               >
                 Inicio
               </button>
-              <button
-                type="button"
-                onClick={() => setMode('study')}
-                className={getNavButtonClass(mode === 'study')}
-              >
-                Profundizar por módulo
-              </button>
-              <button
-                type="button"
-                onClick={() => openQuizSetup('all')}
-                className={getNavButtonClass(mode === 'quiz')}
-              >
-                Hacer examen random
-              </button>
-              <a
-                href="/resumen-tic.pdf"
-                download="resumen-tic.pdf"
-                className="rounded-full border border-cyan-300/35 bg-cyan-300/10 px-4 py-2 text-sm font-semibold text-cyan-100 transition hover:border-cyan-200 hover:bg-cyan-300/15"
-              >
-                Descargar resumen PDF
-              </a>
+              {selectedSubject ? (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setIsSubjectPickerOpen(true)}
+                    className={getNavButtonClass(false)}
+                  >
+                    Cambiar materia
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setMode('study')}
+                    className={getNavButtonClass(mode === 'study')}
+                  >
+                    Profundizar por módulo
+                  </button>
+                  {selectedSubject.cheatSheetSections?.length ? (
+                    <button
+                      type="button"
+                      onClick={() => setMode('cheatsheet')}
+                      className={getNavButtonClass(mode === 'cheatsheet')}
+                    >
+                      Modo machete
+                    </button>
+                  ) : null}
+                  <button
+                    type="button"
+                    onClick={() => openQuizSetup('all')}
+                    className={getNavButtonClass(mode === 'quiz')}
+                  >
+                    Hacer examen random
+                  </button>
+                  <a
+                    href={selectedSubject.summaryPdf}
+                    download
+                    className="rounded-full border border-cyan-300/35 bg-cyan-300/10 px-4 py-2 text-sm font-semibold text-cyan-100 transition hover:border-cyan-200 hover:bg-cyan-300/15"
+                  >
+                    Descargar resumen PDF
+                  </a>
+                </>
+              ) : null}
             </nav>
           </div>
 
@@ -159,62 +298,145 @@ function App() {
             <section className="space-y-5 px-4 py-6 sm:px-8">
               <div className="rounded-[1.75rem] border border-cyan-300/20 bg-cyan-300/10 p-6">
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-100">
-                  Cómo funciona
+                  Elegí la materia
                 </p>
-                <div className="mt-4 grid gap-3 text-sm leading-6 text-slate-200">
-                  <p>1. Se elige un módulo para estudiar y profundizar ideas clave.</p>
-                  <p>2. O se arranca un examen con preguntas y opciones mezcladas.</p>
-                  <p>3. La corrección siempre devuelve una explicación útil.</p>
-                </div>
+                <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-200">
+                  Apenas entrás, la app ahora te deja elegir si querés estudiar
+                  TICs o Desarrollo Mobile y Frontend. Una vez elegida la materia,
+                  se desbloquean los módulos de teoría, las preguntas rápidas y los
+                  mini exámenes con explicación.
+                </p>
               </div>
 
-              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {studyModules.map((module) => (
-                  <article
-                    key={module.id}
-                    className="rounded-[1.75rem] border border-white/10 bg-white/5 p-5"
-                  >
-                    <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                      {module.shortLabel}
-                    </p>
-                    <h2 className="mt-3 text-xl font-bold text-white">
-                      {module.title}
-                    </h2>
-                    <p className="mt-3 text-sm leading-6 text-slate-300">
-                      {module.summary}
-                    </p>
-                    <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setSelectedModuleId(module.id)
-                          setMode('study')
-                        }}
-                        className="w-full rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200 sm:w-auto"
-                      >
-                        Estudiar módulo
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => startQuiz(module.id)}
-                        className="w-full rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:border-cyan-200 hover:text-cyan-100 sm:w-auto"
-                      >
-                        Quiz de este módulo
-                      </button>
-                    </div>
-                  </article>
+              <div className="grid gap-4 xl:grid-cols-2">
+                {studySubjects.map((subject) => (
+                  <SubjectSelectorCard
+                    key={subject.id}
+                    subject={subject}
+                    isActive={subject.id === selectedSubject?.id}
+                    onOpenHome={() => activateSubject(subject.id, 'home')}
+                    onOpenStudy={() => activateSubject(subject.id, 'study')}
+                    onOpenQuiz={() => {
+                      activateSubject(subject.id, 'home')
+                      setPendingQuizModuleId('all')
+                    }}
+                  />
                 ))}
               </div>
+
+              {selectedSubject ? (
+                <>
+                  <div className="rounded-[1.75rem] border border-cyan-300/20 bg-cyan-300/10 p-6">
+                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-100">
+                      Cómo funciona
+                    </p>
+                    <div className="mt-4 grid gap-3 text-sm leading-6 text-slate-200">
+                      <p>1. Elegís un módulo para estudiar ideas clave y profundización.</p>
+                      <p>2. Podés abrir modo machete para repaso express antes del parcial.</p>
+                      <p>3. O arrancás un examen random de toda la materia o de un módulo puntual.</p>
+                      <p>4. La corrección devuelve explicación útil, no solo si está bien o mal.</p>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                    {selectedSubject.modules.map((module) => (
+                      <article
+                        key={module.id}
+                        className="rounded-[1.75rem] border border-white/10 bg-white/5 p-5"
+                      >
+                        <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
+                          {module.shortLabel}
+                        </p>
+                        <h2 className="mt-3 text-xl font-bold text-white">
+                          {module.title}
+                        </h2>
+                        <p className="mt-3 text-sm leading-6 text-slate-300">
+                          {module.summary}
+                        </p>
+                        <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedModuleId(module.id)
+                              setMode('study')
+                            }}
+                            className="w-full rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200 sm:w-auto"
+                          >
+                            Estudiar módulo
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedModuleId(module.id)
+                              openQuizSetup(module.id)
+                            }}
+                            className="w-full rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:border-cyan-200 hover:text-cyan-100 sm:w-auto"
+                          >
+                            Quiz de este módulo
+                          </button>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+
+                  {selectedSubject.cheatSheetSections?.length ? (
+                    <div className="rounded-[1.75rem] border border-fuchsia-300/20 bg-fuchsia-300/10 p-6">
+                      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-fuchsia-100">
+                        Repaso final
+                      </p>
+                      <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-200">
+                        Si querés ir directo a lo más comprimido, entrá al modo machete y repasá
+                        los bloques clave sin pasar por cada módulo completo.
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => setMode('cheatsheet')}
+                        className="mt-5 rounded-full bg-fuchsia-200 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-fuchsia-100"
+                      >
+                        Abrir modo machete
+                      </button>
+                    </div>
+                  ) : null}
+                </>
+              ) : null}
             </section>
           ) : null}
 
-          {mode === 'study' ? (
+          {mode === 'cheatsheet' && selectedSubject?.cheatSheetSections?.length ? (
+            <section className="px-4 py-6 sm:px-8">
+              <article className="rounded-[1.75rem] border border-white/10 bg-slate-950/35 p-6">
+                <p className="text-xs uppercase tracking-[0.24em] text-fuchsia-200">
+                  Machete final
+                </p>
+                <h2 className="mt-2 text-3xl font-black text-white">
+                  Repaso express de {selectedSubject.title}
+                </h2>
+                <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-300">
+                  Este modo junta lo mínimo que conviene tener fresco antes del parcial.
+                  Sirve para una pasada rápida cuando ya estudiaste y solo querés reactivar
+                  conceptos, diferencias y fórmulas cortas.
+                </p>
+
+                <div className="mt-6 grid gap-4 xl:grid-cols-2">
+                  {selectedSubject.cheatSheetSections.map((section) => (
+                    <CheatSheetCard
+                      key={section.title}
+                      title={section.title}
+                      bullets={section.bullets}
+                    />
+                  ))}
+                </div>
+              </article>
+            </section>
+          ) : null}
+
+          {mode === 'study' && selectedSubject && selectedModule ? (
             <section className="grid gap-6 px-4 py-6 sm:px-8 lg:grid-cols-[18rem_1fr]">
               <aside className="space-y-3 rounded-[1.75rem] border border-white/10 bg-slate-950/35 p-4">
                 <p className="px-2 text-xs uppercase tracking-[0.2em] text-slate-400">
                   Elegí un módulo
                 </p>
-                {studyModules.map((module) => (
+                {selectedSubject.modules.map((module) => (
                   <button
                     key={module.id}
                     type="button"
@@ -245,12 +467,41 @@ function App() {
                     {selectedModule.summary}
                   </p>
 
-                  <div className="mt-6 grid gap-4 xl:grid-cols-3">
+                  <div className="mt-6 grid gap-5 xl:grid-cols-2 2xl:grid-cols-3">
                     <StudyCard title="Qué no puede faltar" items={selectedModule.focusAreas} />
                     <StudyCard title="Cómo profundizar" items={selectedModule.deepDive} />
                     <StudyCard title="Cómo practicar" items={selectedModule.practiceTips} />
                   </div>
                 </article>
+
+                {selectedModule.examples?.length ? (
+                  <article className="rounded-[1.75rem] border border-white/10 bg-slate-950/35 p-6">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.24em] text-fuchsia-200">
+                        Ejemplos guiados
+                      </p>
+                      <h3 className="mt-2 text-2xl font-bold text-white">
+                        Estructuras y fragmentos para estudiar con casos concretos
+                      </h3>
+                      <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-300">
+                        Estos ejemplos no reemplazan la teoría, pero ayudan a ver cómo se
+                        traducen los conceptos a código o estructuras reales.
+                      </p>
+                    </div>
+
+                    <div className="mt-6 grid gap-5">
+                      {selectedModule.examples.map((example) => (
+                        <ExampleCard
+                          key={`${selectedModule.id}-${example.title}`}
+                          title={example.title}
+                          language={example.language}
+                          description={example.description}
+                          code={example.code}
+                        />
+                      ))}
+                    </div>
+                  </article>
+                ) : null}
 
                 <article className="rounded-[1.75rem] border border-white/10 bg-slate-950/35 p-6">
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -262,13 +513,13 @@ function App() {
                         Posibles preguntas de este módulo
                       </h3>
                     </div>
-                      <button
-                        type="button"
-                        onClick={() => openQuizSetup(selectedModule.id)}
-                        className="w-full rounded-full bg-amber-300 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-amber-200 sm:w-auto"
-                      >
-                        Probarme en este módulo
-                      </button>
+                    <button
+                      type="button"
+                      onClick={() => openQuizSetup(selectedModule.id)}
+                      className="w-full rounded-full bg-amber-300 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-amber-200 sm:w-auto"
+                    >
+                      Probarme en este módulo
+                    </button>
                   </div>
 
                   <div className="mt-5 grid gap-4">
@@ -295,7 +546,7 @@ function App() {
             </section>
           ) : null}
 
-          {mode === 'quiz' ? (
+          {mode === 'quiz' && selectedSubject ? (
             <section className="px-4 py-6 sm:px-8">
               <div className="rounded-[1.75rem] border border-white/10 bg-slate-950/35 p-6">
                 <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
@@ -305,8 +556,11 @@ function App() {
                     </p>
                     <h2 className="mt-2 text-3xl font-black text-white">
                       {quizModuleId === 'all'
-                        ? 'Examen mixto de todos los módulos'
-                        : `Examen sobre ${studyModules.find((module) => module.id === quizModuleId)?.title}`}
+                        ? `Examen mixto de ${selectedSubject.title}`
+                        : `Examen sobre ${
+                            selectedSubject.modules.find((module) => module.id === quizModuleId)
+                              ?.title
+                          }`}
                     </h2>
                     <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300">
                       Cada intento mezcla preguntas y respuestas para que la práctica
@@ -454,14 +708,14 @@ function App() {
                                       }`}
                                     />
                                   </span>
-                                    <div className="flex-1">
-                                      <p className="font-medium text-white">{option.text}</p>
-                                      {isQuestionRevealed ? (
+                                  <div className="flex-1">
+                                    <p className="font-medium text-white">{option.text}</p>
+                                    {isQuestionRevealed ? (
                                       <p className="mt-2 text-sm leading-6 text-slate-300">
                                         {option.explanation}
                                       </p>
-                                      ) : null}
-                                    </div>
+                                    ) : null}
+                                  </div>
                                 </div>
                               </label>
                             )
@@ -524,7 +778,7 @@ function App() {
         </section>
       </div>
 
-      {pendingQuizModuleId !== null ? (
+      {pendingQuizModuleId !== null && selectedSubject ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/75 px-4 backdrop-blur-sm">
           <div className="w-full max-w-2xl rounded-[1.75rem] border border-white/10 bg-slate-900 p-6 shadow-2xl shadow-slate-950/40">
             <p className="text-xs uppercase tracking-[0.24em] text-cyan-200">
@@ -535,9 +789,10 @@ function App() {
             </h2>
             <p className="mt-3 text-sm leading-6 text-slate-300">
               {pendingQuizModuleId === 'all'
-                ? 'Vas a hacer un examen mixto con preguntas de todos los módulos.'
+                ? `Vas a hacer un examen mixto de ${selectedSubject.title}.`
                 : `Vas a hacer un examen sobre ${
-                    studyModules.find((module) => module.id === pendingQuizModuleId)?.title
+                    selectedSubject.modules.find((module) => module.id === pendingQuizModuleId)
+                      ?.title
                   }.`}{' '}
               Elegí si preferís corregir todo al final o validar una por una mientras contestás.
             </p>
@@ -594,13 +849,61 @@ function App() {
         </div>
       ) : null}
 
+      {isSubjectPickerOpen ? (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/75 px-4 backdrop-blur-sm">
+          <div className="w-full max-w-3xl rounded-[1.75rem] border border-white/10 bg-slate-900 p-6 shadow-2xl shadow-slate-950/40">
+            <p className="text-xs uppercase tracking-[0.24em] text-cyan-200">
+              Antes de empezar
+            </p>
+            <h2 className="mt-3 text-2xl font-black text-white sm:text-3xl">
+              ¿Qué materia querés estudiar?
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-slate-300">
+              Elegí con cuál querés trabajar ahora. Después vas a poder cambiarla
+              desde la navegación superior sin perder el formato de teoría y mini exámenes.
+            </p>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              {studySubjects.map((subject) => (
+                <button
+                  key={subject.id}
+                  type="button"
+                  onClick={() => activateSubject(subject.id, 'home')}
+                  className="rounded-[1.5rem] border border-white/10 bg-white/5 p-5 text-left transition hover:border-cyan-300/45 hover:bg-cyan-300/10"
+                >
+                  <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
+                    {subject.shortLabel}
+                  </p>
+                  <p className="mt-2 text-lg font-bold text-white">{subject.title}</p>
+                  <p className="mt-3 text-sm leading-6 text-slate-300">
+                    {subject.description}
+                  </p>
+                </button>
+              ))}
+            </div>
+
+            {selectedSubject ? (
+              <div className="mt-6 flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => setIsSubjectPickerOpen(false)}
+                  className="rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/5"
+                >
+                  Seguir con {selectedSubject.shortLabel}
+                </button>
+              </div>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
+
       <footer className="border-t border-white/10 bg-slate-950/70">
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-6 text-sm text-slate-300 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+        <div className="mx-auto flex w-full max-w-[1500px] flex-col gap-4 px-3 py-6 text-sm text-slate-300 sm:px-4 lg:flex-row lg:items-center lg:justify-between lg:px-5">
           <div>
-            <p className="font-semibold text-white">Preparador TICs</p>
+            <p className="font-semibold text-white">Preparador de materias</p>
             <p className="mt-1 text-slate-400">
-              Proyecto en evolución: más adelante va a convertirse en una app para
-              preparar múltiples materias.
+              Ahora el proyecto permite elegir entre TICs y Desarrollo Mobile +
+              Frontend, manteniendo teoría guiada y mini exámenes explicados.
             </p>
           </div>
 
@@ -653,14 +956,117 @@ function MetricCard({ label, value }: { label: string; value: string }) {
 
 function StudyCard({ title, items }: { title: string; items: string[] }) {
   return (
-    <section className="rounded-[1.5rem] border border-white/10 bg-slate-950/35 p-4">
+    <section className="rounded-[1.5rem] border border-white/10 bg-slate-950/35 p-5 sm:p-6">
       <h3 className="text-lg font-bold text-white">{title}</h3>
-      <div className="mt-4 space-y-3 text-sm leading-6 text-slate-300">
+      <div className="mt-4 space-y-4 text-sm leading-7 text-slate-300">
         {items.map((item) => (
           <p key={item}>{item}</p>
         ))}
       </div>
     </section>
+  )
+}
+
+function ExampleCard({
+  title,
+  language,
+  description,
+  code,
+}: {
+  title: string
+  language: string
+  description: string
+  code: string
+}) {
+  return (
+    <section className="rounded-[1.5rem] border border-white/10 bg-white/5 p-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h4 className="text-lg font-bold text-white">{title}</h4>
+          <p className="mt-2 text-sm leading-6 text-slate-300">{description}</p>
+        </div>
+        <span className="inline-flex rounded-full border border-cyan-300/25 bg-cyan-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-cyan-100">
+          {language}
+        </span>
+      </div>
+
+      <pre className="mt-4 overflow-x-auto rounded-2xl border border-white/10 bg-slate-950/80 p-4 text-sm leading-6 text-slate-200">
+        <code>{code}</code>
+      </pre>
+    </section>
+  )
+}
+
+function CheatSheetCard({
+  title,
+  bullets,
+}: {
+  title: string
+  bullets: string[]
+}) {
+  return (
+    <section className="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
+      <h3 className="text-lg font-bold text-white">{title}</h3>
+      <div className="mt-4 space-y-3 text-sm leading-6 text-slate-300">
+        {bullets.map((bullet) => (
+          <p key={bullet}>{bullet}</p>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function SubjectSelectorCard({
+  subject,
+  isActive,
+  onOpenHome,
+  onOpenStudy,
+  onOpenQuiz,
+}: {
+  subject: StudySubject
+  isActive: boolean
+  onOpenHome: () => void
+  onOpenStudy: () => void
+  onOpenQuiz: () => void
+}) {
+  return (
+    <article
+      className={`rounded-[1.75rem] border p-6 transition ${
+        isActive
+          ? 'border-cyan-300/35 bg-cyan-300/10 shadow-lg shadow-cyan-950/20'
+          : 'border-white/10 bg-white/5'
+      }`}
+    >
+      <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
+        {subject.shortLabel}
+      </p>
+      <h2 className="mt-3 text-2xl font-black text-white">{subject.title}</h2>
+      <p className="mt-4 text-sm leading-6 text-slate-300">{subject.description}</p>
+
+      <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+        <button
+          type="button"
+          onClick={onOpenHome}
+          className="w-full rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200 sm:w-auto"
+        >
+          Elegir materia
+        </button>
+        <button
+          type="button"
+          onClick={onOpenStudy}
+          className="w-full rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:border-cyan-200 hover:text-cyan-100 sm:w-auto"
+        >
+          Ir a teoría
+        </button>
+        <button
+          type="button"
+          onClick={onOpenQuiz}
+          className="w-full rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:border-cyan-200 hover:text-cyan-100 sm:w-auto"
+        >
+          Mini examen
+        </button>
+      </div>
+    </article>
   )
 }
 

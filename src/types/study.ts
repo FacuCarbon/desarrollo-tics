@@ -1,4 +1,15 @@
-export type StudyMode = 'home' | 'study' | 'quiz'
+export type StudyMode = 'home' | 'study' | 'quiz' | 'cheatsheet'
+
+export interface StudySubject {
+  id: string
+  title: string
+  shortLabel: string
+  description: string
+  summaryPdf: string
+  modules: StudyModule[]
+  questions: QuizQuestion[]
+  cheatSheetSections?: CheatSheetSection[]
+}
 
 export interface StudyModule {
   id: string
@@ -8,6 +19,19 @@ export interface StudyModule {
   focusAreas: string[]
   deepDive: string[]
   practiceTips: string[]
+  examples?: StudyExample[]
+}
+
+export interface StudyExample {
+  title: string
+  language: string
+  description: string
+  code: string
+}
+
+export interface CheatSheetSection {
+  title: string
+  bullets: string[]
 }
 
 export interface QuestionOption {

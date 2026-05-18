@@ -1,0 +1,2106 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Count 19 /Kids [4 0 R 6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R 20 0 R 22 0 R 24 0 R 26 0 R 28 0 R 30 0 R 32 0 R 34 0 R 36 0 R 38 0 R 40 0 R] >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 1938 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+50 792 Td
+(RESUMEN TEORICO PARA PARCIALES) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Este resumen integra el contenido principal de los PDFs de la carpeta para Desarrollo de Apps) Tj
+T*
+(Mobile y Desarrollo Frontend. La idea es que sirva para estudiar teoria rapido, detectar temas) Tj
+T*
+(fuertes y despues decidir que profundizar.) Tj
+T*
+() Tj
+T*
+(1. APIS, REST, HTTP, JSON Y POSTMAN) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(QUE ES UNA API) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(API significa Application Programming Interface o Interfaz de Programacion de Aplicaciones.) Tj
+T*
+() Tj
+T*
+(Una API es un mecanismo que permite la comunicacion entre sistemas o aplicaciones de forma) Tj
+T*
+(organizada y estandarizada. Funciona como un intermediario entre un cliente y un servidor.) Tj
+T*
+() Tj
+T*
+(Se dice que una API funciona como un contrato porque define:) Tj
+T*
+() Tj
+T*
+(- que operaciones se pueden realizar) Tj
+T*
+(- como deben enviarse las solicitudes) Tj
+T*
+(- que datos deben enviarse) Tj
+T*
+(- como sera la respuesta) Tj
+T*
+() Tj
+T*
+(MODELO CLIENTE-SERVIDOR) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(El modelo cliente-servidor es la base del funcionamiento de internet y de la mayoria de las) Tj
+T*
+(apps modernas.) Tj
+T*
+() Tj
+T*
+(- El cliente inicia la comunicacion. Suele ser una app web, una app mobile o un frontend.) Tj
+T*
+(- El servidor recibe la solicitud, procesa la logica y devuelve una respuesta.) Tj
+T*
+() Tj
+T*
+(Flujo basico:) Tj
+T*
+() Tj
+T*
+(1. El cliente realiza una solicitud.) Tj
+T*
+(2. El servidor recibe la peticion.) Tj
+T*
+(3. El servidor procesa la informacion.) Tj
+T*
+(4. El servidor devuelve una respuesta.) Tj
+T*
+(5. El cliente recibe y muestra el resultado.) Tj
+T*
+() Tj
+T*
+(Una buena analogia es la de un restaurante:) Tj
+T*
+() Tj
+T*
+(- el cliente es la aplicacion) Tj
+T*
+(- la API es el mozo) Tj
+T*
+(- el servidor es la cocina) Tj
+T*
+() Tj
+T*
+(La aplicacion no accede directamente a la base de datos ni a la logica interna del servidor:) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 1550 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+50 792 Td
+(pide algo a traves de la API.) Tj
+T*
+() Tj
+T*
+(TIPOS DE APIS) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Segun el material, aparecen estos tipos:) Tj
+T*
+() Tj
+T*
+(- APIs de sistema: interactuan con sistema operativo o hardware.) Tj
+T*
+(- APIs de bibliotecas o frameworks: simplifican el uso de tecnologias complejas.) Tj
+T*
+(- APIs web: permiten intercambiar informacion por internet, normalmente usando HTTP.) Tj
+T*
+(- APIs publicas y privadas) Tj
+T*
+(- APIs para hardware) Tj
+T*
+() Tj
+T*
+(En mobile, las mas importantes suelen ser las APIs web, especialmente REST + JSON.) Tj
+T*
+() Tj
+T*
+(REST Y SOAP) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(REST) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(REST \(Representational State Transfer\) es el modelo mas usado para desarrollar APIs web) Tj
+T*
+(modernas.) Tj
+T*
+() Tj
+T*
+(Caracteristicas:) Tj
+T*
+() Tj
+T*
+(- utiliza HTTP) Tj
+T*
+(- trabaja normalmente con JSON) Tj
+T*
+(- modela la informacion como recursos) Tj
+T*
+(- cada recurso se identifica con una URL) Tj
+T*
+(- suele ser stateless) Tj
+T*
+(- es liviano y flexible) Tj
+T*
+() Tj
+T*
+(Se usa mucho en apps mobile y frontend porque simplifica la comunicacion entre cliente y) Tj
+T*
+(servidor.) Tj
+T*
+() Tj
+T*
+(SOAP) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(SOAP \(Simple Object Access Protocol\) es un protocolo mas estricto.) Tj
+T*
+() Tj
+T*
+(Caracteristicas:) Tj
+T*
+() Tj
+T*
+(- define reglas estrictas de intercambio) Tj
+T*
+(- utiliza normalmente XML) Tj
+T*
+(- suele ser mas pesado y formal) Tj
+T*
+(- sigue usandose en sistemas corporativos criticos) Tj
+T*
+() Tj
+T*
+(DIFERENCIA GENERAL) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 9 0 R >>
+endobj
+9 0 obj
+<< /Length 1261 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+50 792 Td
+() Tj
+T*
+() Tj
+T*
+(- REST domina en apps web, frontend y mobile.) Tj
+T*
+(- SOAP aparece mas en entornos empresariales donde se priorizan reglas muy estrictas.) Tj
+T*
+() Tj
+T*
+(HTTP) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(HTTP es el protocolo de comunicacion usado constantemente en la web y en las APIs.) Tj
+T*
+() Tj
+T*
+(Los metodos HTTP principales son:) Tj
+T*
+() Tj
+T*
+(- GET: obtener informacion) Tj
+T*
+(- POST: crear o enviar informacion) Tj
+T*
+(- PUT: actualizar informacion) Tj
+T*
+(- DELETE: eliminar informacion) Tj
+T*
+() Tj
+T*
+(Relacion con CRUD:) Tj
+T*
+() Tj
+T*
+(- Create -> POST) Tj
+T*
+(- Read -> GET) Tj
+T*
+(- Update -> PUT) Tj
+T*
+(- Delete -> DELETE) Tj
+T*
+() Tj
+T*
+(REQUEST Y RESPONSE) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Cuando un cliente usa una API:) Tj
+T*
+() Tj
+T*
+(- envia una request o solicitud) Tj
+T*
+(- recibe una response o respuesta) Tj
+T*
+() Tj
+T*
+(En esa comunicacion suelen viajar:) Tj
+T*
+() Tj
+T*
+(- metodo HTTP) Tj
+T*
+(- URL o endpoint) Tj
+T*
+(- headers) Tj
+T*
+(- body) Tj
+T*
+(- codigo de estado HTTP) Tj
+T*
+() Tj
+T*
+(CODIGOS HTTP) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Los codigos de estado indican el resultado de la peticion.) Tj
+T*
+() Tj
+T*
+(- 2XX: exito) Tj
+T*
+(- 4XX: error del cliente) Tj
+T*
+(- 5XX: error del servidor) Tj
+T*
+() Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 11 0 R >>
+endobj
+11 0 obj
+<< /Length 1580 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+50 792 Td
+(Ejemplos importantes:) Tj
+T*
+() Tj
+T*
+(- 400 Bad Request: la solicitud esta mal formada) Tj
+T*
+(- 401 Unauthorized: no hay autenticacion valida) Tj
+T*
+(- 403 Forbidden: el cliente esta autenticado pero no tiene permisos suficientes) Tj
+T*
+(- 500 Internal Server Error: error interno del servidor) Tj
+T*
+() Tj
+T*
+(JSON) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(JSON \(JavaScript Object Notation\) es el formato mas usado para intercambiar informacion entre) Tj
+T*
+(aplicaciones y APIs.) Tj
+T*
+() Tj
+T*
+(Ideas clave:) Tj
+T*
+() Tj
+T*
+(- aunque su nombre viene de JavaScript, no depende de JavaScript) Tj
+T*
+(- es simple de leer y escribir) Tj
+T*
+(- es liviano) Tj
+T*
+(- es facil de procesar en muchos lenguajes) Tj
+T*
+(- por eso domina en APIs REST) Tj
+T*
+() Tj
+T*
+(ENDPOINT) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Un endpoint es un punto especifico de acceso dentro de una API.) Tj
+T*
+() Tj
+T*
+(La URL identifica el recurso y el metodo HTTP indica la accion.) Tj
+T*
+() Tj
+T*
+(Ejemplo conceptual:) Tj
+T*
+() Tj
+T*
+(- GET /usuarios -> obtener usuarios) Tj
+T*
+(- POST /usuarios -> crear un usuario) Tj
+T*
+(- GET /usuarios/5 -> obtener un usuario especifico) Tj
+T*
+() Tj
+T*
+(POSTMAN) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Postman es una herramienta para probar APIs sin tener que programar primero una interfaz.) Tj
+T*
+() Tj
+T*
+(Permite:) Tj
+T*
+() Tj
+T*
+(- enviar solicitudes HTTP) Tj
+T*
+(- probar endpoints) Tj
+T*
+(- enviar headers y body) Tj
+T*
+(- ver respuestas JSON) Tj
+T*
+(- verificar codigos HTTP) Tj
+T*
+(- detectar errores antes de integrar la API en la app) Tj
+T*
+() Tj
+T*
+(Uso basico:) Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 13 0 R >>
+endobj
+13 0 obj
+<< /Length 1430 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+50 792 Td
+() Tj
+T*
+(1. Elegir metodo HTTP.) Tj
+T*
+(2. Escribir endpoint.) Tj
+T*
+(3. Agregar headers o body si hace falta.) Tj
+T*
+(4. Enviar la solicitud.) Tj
+T*
+(5. Analizar la respuesta.) Tj
+T*
+() Tj
+T*
+(2. JWT, AUTENTICACION Y AUTORIZACION) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(QUE ES JWT) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(JWT significa JSON Web Token.) Tj
+T*
+() Tj
+T*
+(Es un estandar abierto para transmitir informacion de forma segura y verificable entre) Tj
+T*
+(distintas partes. Se usa mucho en:) Tj
+T*
+() Tj
+T*
+(- autenticacion) Tj
+T*
+(- autorizacion) Tj
+T*
+(- APIs REST) Tj
+T*
+(- aplicaciones web) Tj
+T*
+(- aplicaciones mobile) Tj
+T*
+(- microservicios) Tj
+T*
+() Tj
+T*
+(IDEA CENTRAL) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Con JWT, el servidor genera un token firmado digitalmente y el cliente lo envia en peticiones) Tj
+T*
+(posteriores para demostrar identidad y permisos.) Tj
+T*
+() Tj
+T*
+(Esto permite evitar, en muchos casos, el almacenamiento constante de sesiones en el servidor.) Tj
+T*
+() Tj
+T*
+(AUTENTICACION VS AUTORIZACION) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Es una distincion obligatoria para parcial.) Tj
+T*
+() Tj
+T*
+(- Autenticacion: responde quien sos. Verifica identidad.) Tj
+T*
+(- Autorizacion: responde que podes hacer. Verifica permisos.) Tj
+T*
+() Tj
+T*
+(Frase corta que conviene memorizar:) Tj
+T*
+() Tj
+T*
+(- la autenticacion identifica) Tj
+T*
+(- la autorizacion otorga permisos) Tj
+T*
+() Tj
+T*
+(STATELESS) Tj
+T*
+() Tj
+T*
+() Tj
+ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 15 0 R >>
+endobj
+15 0 obj
+<< /Length 1787 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+50 792 Td
+(JWT se considera un mecanismo stateless.) Tj
+T*
+() Tj
+T*
+(Stateless significa sin estado: cada request contiene la informacion necesaria para que el) Tj
+T*
+(servidor la procese sin depender de una sesion almacenada en memoria.) Tj
+T*
+() Tj
+T*
+(Ventajas:) Tj
+T*
+() Tj
+T*
+(- mayor escalabilidad) Tj
+T*
+(- menor dependencia de sesiones centralizadas) Tj
+T*
+(- mas facilidad para arquitecturas distribuidas) Tj
+T*
+(- desacople entre frontend y backend) Tj
+T*
+() Tj
+T*
+(MODELO TRADICIONAL: SESIONES Y COOKIES) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Antes de JWT, lo habitual era autenticar asi:) Tj
+T*
+() Tj
+T*
+(1. El usuario inicia sesion.) Tj
+T*
+(2. El servidor valida credenciales.) Tj
+T*
+(3. El servidor crea una sesion.) Tj
+T*
+(4. La sesion se identifica con un SESSION_ID.) Tj
+T*
+(5. Ese identificador se envia al navegador mediante una cookie.) Tj
+T*
+(6. El navegador reenvia la cookie en solicitudes futuras.) Tj
+T*
+(7. El servidor busca la sesion asociada.) Tj
+T*
+() Tj
+T*
+(Ideas clave:) Tj
+T*
+() Tj
+T*
+(- HTTP es stateless) Tj
+T*
+(- las cookies ayudan a mantener contexto entre requests) Tj
+T*
+(- la cookie no suele guardar todos los datos del usuario, sino un identificador) Tj
+T*
+() Tj
+T*
+(Tipos de cookies:) Tj
+T*
+() Tj
+T*
+(- cookies de sesion: temporales) Tj
+T*
+(- cookies persistentes: duran mas tiempo) Tj
+T*
+() Tj
+T*
+(POR QUE APARECE JWT) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(El enfoque con sesiones funciona, pero presenta problemas cuando crecen la cantidad de) Tj
+T*
+(usuarios, servidores o servicios.) Tj
+T*
+() Tj
+T*
+(JWT aparece como alternativa moderna porque:) Tj
+T*
+() Tj
+T*
+(- evita consultar sesiones continuamente) Tj
+T*
+(- simplifica sistemas distribuidos) Tj
+T*
+(- permite validar tokens en distintos servidores) Tj
+T*
+(- mejora escalabilidad) Tj
+T*
+() Tj
+ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 17 0 R >>
+endobj
+17 0 obj
+<< /Length 1113 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+50 792 Td
+(ESTRUCTURA DE UN JWT) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Un JWT tiene tres partes:) Tj
+T*
+() Tj
+T*
+(- Header) Tj
+T*
+(- Payload) Tj
+T*
+(- Signature) Tj
+T*
+() Tj
+T*
+(Se suele ver asi:) Tj
+T*
+() Tj
+T*
+(HEADER.PAYLOAD.SIGNATURE) Tj
+T*
+() Tj
+T*
+(HEADER) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Contiene metadatos del token, por ejemplo:) Tj
+T*
+() Tj
+T*
+(- tipo de token) Tj
+T*
+(- algoritmo de firma) Tj
+T*
+() Tj
+T*
+(Campos habituales:) Tj
+T*
+() Tj
+T*
+(- typ: tipo de token, por ejemplo JWT) Tj
+T*
+(- alg: algoritmo utilizado para firmar) Tj
+T*
+() Tj
+T*
+(PAYLOAD) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Contiene informacion del usuario o del proceso de autenticacion.) Tj
+T*
+() Tj
+T*
+(Puede incluir:) Tj
+T*
+() Tj
+T*
+(- identificador del usuario) Tj
+T*
+(- fecha de emision) Tj
+T*
+(- fecha de expiracion) Tj
+T*
+(- roles) Tj
+T*
+(- permisos) Tj
+T*
+() Tj
+T*
+(Claims muy importantes:) Tj
+T*
+() Tj
+T*
+(- sub: sujeto o usuario identificado) Tj
+T*
+(- exp: fecha de expiracion) Tj
+T*
+(- iss: emisor) Tj
+T*
+(- nbf: desde cuando el token es valido) Tj
+T*
+() Tj
+T*
+(Punto clave de examen:) Tj
+T*
+() Tj
+T*
+(- el payload no esta cifrado) Tj
+ET
+endstream
+endobj
+18 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 19 0 R >>
+endobj
+19 0 obj
+<< /Length 1381 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+50 792 Td
+(- se puede decodificar facilmente) Tj
+T*
+(- por eso no deben guardarse datos sensibles dentro del token) Tj
+T*
+() Tj
+T*
+(JWT garantiza:) Tj
+T*
+() Tj
+T*
+(- integridad) Tj
+T*
+(- autenticidad) Tj
+T*
+() Tj
+T*
+(JWT no garantiza por si solo:) Tj
+T*
+() Tj
+T*
+(- confidencialidad) Tj
+T*
+() Tj
+T*
+(SIGNATURE) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(La signature es la firma digital.) Tj
+T*
+() Tj
+T*
+(Sirve para verificar que el contenido del token no fue alterado.) Tj
+T*
+() Tj
+T*
+(El servidor:) Tj
+T*
+() Tj
+T*
+(1. firma el token al crearlo) Tj
+T*
+(2. recalcula la firma cuando lo recibe) Tj
+T*
+(3. compara el resultado) Tj
+T*
+() Tj
+T*
+(Si el token fue alterado, la firma deja de coincidir y el servidor lo rechaza.) Tj
+T*
+() Tj
+T*
+(INTEGRIDAD VS CONFIDENCIALIDAD) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Esto suele confundirse mucho.) Tj
+T*
+() Tj
+T*
+(- Integridad: asegura que el contenido no fue modificado.) Tj
+T*
+(- Confidencialidad: asegura que el contenido no pueda leerse.) Tj
+T*
+() Tj
+T*
+(JWT se apoya en firma digital, no en ocultamiento.) Tj
+T*
+() Tj
+T*
+(Conclusion:) Tj
+T*
+() Tj
+T*
+(- JWT firma la informacion) Tj
+T*
+(- JWT no necesariamente la cifra) Tj
+T*
+() Tj
+T*
+(FLUJO BASICO CON JWT) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(1. El usuario envia credenciales.) Tj
+T*
+(2. El servidor autentica al usuario.) Tj
+T*
+(3. El servidor genera el JWT.) Tj
+T*
+(4. El cliente almacena el token.) Tj
+ET
+endstream
+endobj
+20 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 21 0 R >>
+endobj
+21 0 obj
+<< /Length 1461 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+50 792 Td
+(5. El cliente envia el token en cada request protegida.) Tj
+T*
+(6. El servidor verifica firma, expiracion y datos.) Tj
+T*
+(7. Si es valido, permite acceso.) Tj
+T*
+() Tj
+T*
+(Header habitual:) Tj
+T*
+() Tj
+T*
+(Authorization: Bearer <token>) Tj
+T*
+() Tj
+T*
+(ACCESS TOKEN Y REFRESH TOKEN) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(ACCESS TOKEN) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(- se usa para acceder a recursos protegidos) Tj
+T*
+(- viaja normalmente en el header HTTP) Tj
+T*
+(- suele tener vida corta) Tj
+T*
+() Tj
+T*
+(REFRESH TOKEN) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(- sirve para obtener un nuevo access token sin volver a loguearse) Tj
+T*
+(- suele tener vida mas larga) Tj
+T*
+(- no deberia enviarse en cada request comun) Tj
+T*
+() Tj
+T*
+(Flujo:) Tj
+T*
+() Tj
+T*
+(1. El usuario inicia sesion.) Tj
+T*
+(2. El servidor entrega access token y refresh token.) Tj
+T*
+(3. La app usa el access token normalmente.) Tj
+T*
+(4. Cuando expira, usa el refresh token para pedir uno nuevo.) Tj
+T*
+() Tj
+T*
+(ALMACENAMIENTO SEGURO) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(En mobile y frontend, no solo importa usar JWT sino guardarlo correctamente.) Tj
+T*
+() Tj
+T*
+(Riesgos mencionados:) Tj
+T*
+() Tj
+T*
+(- robo de tokens) Tj
+T*
+(- almacenamiento inseguro) Tj
+T*
+(- uso de localStorage con exposicion a XSS) Tj
+T*
+() Tj
+T*
+(Buenas practicas:) Tj
+T*
+() Tj
+T*
+(- usar HTTPS) Tj
+T*
+(- usar expiracion corta para access tokens) Tj
+T*
+(- usar refresh tokens) Tj
+T*
+(- validar correctamente exp, iss, nbf) Tj
+ET
+endstream
+endobj
+22 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 23 0 R >>
+endobj
+23 0 obj
+<< /Length 1584 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+50 792 Td
+(- no guardar datos sensibles en el payload) Tj
+T*
+(- proteger bien las claves de firma) Tj
+T*
+() Tj
+T*
+(ALGORITMOS DE FIRMA) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(El material menciona dos enfoques generales:) Tj
+T*
+() Tj
+T*
+(- simetrico: misma clave firma y valida) Tj
+T*
+(- asimetrico: clave privada firma y clave publica valida) Tj
+T*
+() Tj
+T*
+(Idea teorica:) Tj
+T*
+() Tj
+T*
+(- el enfoque asimetrico permite que varios servicios validen sin exponer la clave privada de) Tj
+T*
+(  firma) Tj
+T*
+() Tj
+T*
+(JWT VS OAUTH 2.0) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Otra diferencia teorica importante:) Tj
+T*
+() Tj
+T*
+(- JWT es un formato de token) Tj
+T*
+(- OAuth 2.0 es un protocolo de autorizacion) Tj
+T*
+() Tj
+T*
+(Suelen usarse juntos, pero no son lo mismo.) Tj
+T*
+() Tj
+T*
+(IDEA FINAL PARA MEMORIZAR) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(JWT no es magia ni seguridad automatica. Es una herramienta potente para autenticacion y) Tj
+T*
+(autorizacion modernas, pero depende de una implementacion correcta.) Tj
+T*
+() Tj
+T*
+(3. JAVASCRIPT) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(ORIGEN) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(JavaScript fue creado en 1995 en el contexto del crecimiento de la web. Brendan Eich lo) Tj
+T*
+(implemento en muy poco tiempo. Primero se llamo Mocha, luego LiveScript y finalmente) Tj
+T*
+(JavaScript.) Tj
+T*
+() Tj
+T*
+(En 1997 se definio el estandar ECMAScript.) Tj
+T*
+() Tj
+T*
+(En 2009, con Node.js, JavaScript paso a ejecutarse tambien fuera del navegador.) Tj
+T*
+() Tj
+T*
+(Desde ES6 \(2015\) incorporo mejoras importantes como let, const y funciones flecha.) Tj
+T*
+() Tj
+T*
+(QUE ES JAVASCRIPT) Tj
+ET
+endstream
+endobj
+24 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 25 0 R >>
+endobj
+25 0 obj
+<< /Length 1280 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+50 792 Td
+() Tj
+T*
+() Tj
+T*
+(JavaScript es un lenguaje de programacion que permite crear contenido dinamico e interactivo en) Tj
+T*
+(paginas web.) Tj
+T*
+() Tj
+T*
+(Se usa para:) Tj
+T*
+() Tj
+T*
+(- validaciones) Tj
+T*
+(- animaciones) Tj
+T*
+(- manipulacion del DOM) Tj
+T*
+(- eventos) Tj
+T*
+(- actualizaciones en tiempo real) Tj
+T*
+(- frontend) Tj
+T*
+(- backend) Tj
+T*
+(- mobile) Tj
+T*
+() Tj
+T*
+(CARACTERISTICAS PRINCIPALES) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(- alto nivel) Tj
+T*
+(- interpretado) Tj
+T*
+(- tipado dinamico) Tj
+T*
+(- tipado debil) Tj
+T*
+(- multiparadigma) Tj
+T*
+(- multiplataforma) Tj
+T*
+(- dinamico) Tj
+T*
+() Tj
+T*
+(ALTO NIVEL) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Su sintaxis esta orientada a facilitar lectura y escritura por parte de desarrolladores.) Tj
+T*
+() Tj
+T*
+(INTERPRETADO) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(El codigo se ejecuta en tiempo de ejecucion mediante un interprete o motor, sin requerir una) Tj
+T*
+(compilacion tradicional previa a lenguaje maquina.) Tj
+T*
+() Tj
+T*
+(TIPADO DINAMICO Y DEBIL) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(- una variable puede cambiar de tipo en tiempo de ejecucion) Tj
+T*
+(- el lenguaje hace conversiones implicitas en algunos casos) Tj
+T*
+() Tj
+T*
+(MULTIPARADIGMA) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Permite programar con distintos enfoques:) Tj
+T*
+() Tj
+ET
+endstream
+endobj
+26 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 27 0 R >>
+endobj
+27 0 obj
+<< /Length 1355 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+50 792 Td
+(- imperativo) Tj
+T*
+(- funcional) Tj
+T*
+(- orientado a objetos) Tj
+T*
+() Tj
+T*
+(MOTORES DE JAVASCRIPT) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Los motores son programas que analizan e interpretan codigo JavaScript.) Tj
+T*
+() Tj
+T*
+(Ejemplos:) Tj
+T*
+() Tj
+T*
+(- V8: Chrome y Node.js) Tj
+T*
+(- SpiderMonkey: Firefox) Tj
+T*
+(- JavaScriptCore: Safari) Tj
+T*
+() Tj
+T*
+(JAVASCRIPT Y NODE.JS) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(No son lo mismo.) Tj
+T*
+() Tj
+T*
+(- JavaScript es el lenguaje) Tj
+T*
+(- Node.js es un entorno de ejecucion para usar JavaScript fuera del navegador) Tj
+T*
+() Tj
+T*
+(Node.js tambien trae npm, que permite gestionar paquetes y dependencias.) Tj
+T*
+() Tj
+T*
+(SCRIPT Y LENGUAJE DE SCRIPTING) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Un script es un conjunto de instrucciones que se ejecutan dentro de un entorno.) Tj
+T*
+() Tj
+T*
+(JavaScript es un lenguaje de scripting de proposito general ajustado a la especificacion) Tj
+T*
+(ECMAScript.) Tj
+T*
+() Tj
+T*
+(TEMAS TECNICOS VISTOS EN LA PRESENTACION) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Ademas del marco teorico general, el PDF toca:) Tj
+T*
+() Tj
+T*
+(- variables var, let, const) Tj
+T*
+(- tipos de datos primitivos y no primitivos) Tj
+T*
+(- objetos) Tj
+T*
+(- arrays) Tj
+T*
+(- funciones) Tj
+T*
+(- funciones flecha) Tj
+T*
+(- eventos) Tj
+T*
+(- condicionales) Tj
+T*
+(- bucles) Tj
+T*
+(- DOM) Tj
+T*
+(- try...catch) Tj
+ET
+endstream
+endobj
+28 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 29 0 R >>
+endobj
+29 0 obj
+<< /Length 1367 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+50 792 Td
+() Tj
+T*
+(Para teoria, lo importante es saber que son y para que sirven, no necesariamente memorizar) Tj
+T*
+(sintaxis completa.) Tj
+T*
+() Tj
+T*
+(4. HERRAMIENTAS Y STACK DE DESARROLLO HIBRIDO) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Este bloque viene de herramientas_creacion_proyecto.pdf.) Tj
+T*
+() Tj
+T*
+(IDEA GENERAL) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(El desarrollo de aplicaciones moviles hibridas permite construir apps usando tecnologias web) Tj
+T*
+(como HTML, CSS y JavaScript.) Tj
+T*
+() Tj
+T*
+(La sesion del material busca:) Tj
+T*
+() Tj
+T*
+(- instalar herramientas) Tj
+T*
+(- crear un proyecto inicial) Tj
+T*
+(- entender estructura de archivos y carpetas) Tj
+T*
+(- usar consola del navegador) Tj
+T*
+(- comprender la importancia de comentar el codigo) Tj
+T*
+() Tj
+T*
+(VISUAL STUDIO CODE) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Visual Studio Code es el editor de texto que se usa para escribir y organizar el codigo.) Tj
+T*
+() Tj
+T*
+(No es:) Tj
+T*
+() Tj
+T*
+(- lenguaje de programacion) Tj
+T*
+(- framework) Tj
+T*
+(- entorno de ejecucion) Tj
+T*
+() Tj
+T*
+(NODE.JS) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Node.js es un entorno de ejecucion que permite ejecutar JavaScript fuera del navegador.) Tj
+T*
+() Tj
+T*
+(Ademas:) Tj
+T*
+() Tj
+T*
+(- incluye npm) Tj
+T*
+(- permite gestionar dependencias) Tj
+T*
+() Tj
+T*
+(No es:) Tj
+T*
+() Tj
+T*
+(- un lenguaje) Tj
+T*
+(- un framework visual) Tj
+T*
+() Tj
+ET
+endstream
+endobj
+30 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 31 0 R >>
+endobj
+31 0 obj
+<< /Length 1273 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+50 792 Td
+(ANGULAR) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Angular es un framework de desarrollo web basado en TypeScript.) Tj
+T*
+() Tj
+T*
+(Permite construir aplicaciones dinamicas y estructuradas mediante componentes.) Tj
+T*
+() Tj
+T*
+(Cada componente puede encapsular:) Tj
+T*
+() Tj
+T*
+(- estructura \(HTML\)) Tj
+T*
+(- estilo \(CSS\)) Tj
+T*
+(- logica \(TypeScript\)) Tj
+T*
+() Tj
+T*
+(Angular se usa para organizar la aplicacion y su logica.) Tj
+T*
+() Tj
+T*
+(IONIC) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Ionic es un framework para desarrollar aplicaciones moviles hibridas.) Tj
+T*
+() Tj
+T*
+(Su foco principal es:) Tj
+T*
+() Tj
+T*
+(- interfaz de usuario) Tj
+T*
+(- componentes visuales adaptados a mobile) Tj
+T*
+() Tj
+T*
+(Punto teorico clave:) Tj
+T*
+() Tj
+T*
+(- Ionic no reemplaza la logica de Angular) Tj
+T*
+(- Ionic se ocupa mas de como se ve la app) Tj
+T*
+(- Angular se ocupa mas de como funciona) Tj
+T*
+() Tj
+T*
+(CAPACITOR) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Capacitor permite conectar una aplicacion web con funcionalidades nativas del dispositivo.) Tj
+T*
+() Tj
+T*
+(Ejemplos:) Tj
+T*
+() Tj
+T*
+(- camara) Tj
+T*
+(- GPS) Tj
+T*
+(- almacenamiento) Tj
+T*
+() Tj
+T*
+(Se integra con Angular e Ionic.) Tj
+T*
+() Tj
+T*
+(COMO SE COMPLEMENTAN) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Frase corta muy util:) Tj
+T*
+() Tj
+ET
+endstream
+endobj
+32 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 33 0 R >>
+endobj
+33 0 obj
+<< /Length 1206 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+50 792 Td
+(- Angular organiza la logica) Tj
+T*
+(- Ionic aporta la interfaz mobile) Tj
+T*
+(- Capacitor conecta con el dispositivo) Tj
+T*
+() Tj
+T*
+(No compiten entre si. Se complementan.) Tj
+T*
+() Tj
+T*
+(CLI) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(El material nombra:) Tj
+T*
+() Tj
+T*
+(- Angular CLI) Tj
+T*
+(- Ionic CLI) Tj
+T*
+() Tj
+T*
+(Se usan para crear, organizar y ejecutar proyectos.) Tj
+T*
+() Tj
+T*
+(Comandos mencionados:) Tj
+T*
+() Tj
+T*
+(- ionic start miProyecto) Tj
+T*
+(- cd miProyecto) Tj
+T*
+(- ionic serve) Tj
+T*
+() Tj
+T*
+(ESTRUCTURA DEL PROYECTO) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(El material remarca que hay que entender la estructura de carpetas y archivos.) Tj
+T*
+() Tj
+T*
+(Tambien menciona archivos de configuracion como:) Tj
+T*
+() Tj
+T*
+(- angular.json) Tj
+T*
+(- package.json) Tj
+T*
+() Tj
+T*
+(CONSOLA Y COMENTARIOS) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(La consola del navegador sirve para:) Tj
+T*
+() Tj
+T*
+(- ver informacion durante la ejecucion) Tj
+T*
+(- depurar) Tj
+T*
+(- analizar comportamiento del codigo) Tj
+T*
+() Tj
+T*
+(Los comentarios sirven para:) Tj
+T*
+() Tj
+T*
+(- mejorar comprension) Tj
+T*
+(- facilitar mantenimiento) Tj
+T*
+(- ayudar al trabajo colaborativo) Tj
+T*
+() Tj
+T*
+(5. HTML) Tj
+T*
+() Tj
+ET
+endstream
+endobj
+34 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 35 0 R >>
+endobj
+35 0 obj
+<< /Length 1228 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+50 792 Td
+() Tj
+T*
+(La guia de HTML es practica, pero deja claros los conceptos que pueden tomarse en teoria.) Tj
+T*
+() Tj
+T*
+(ESTRUCTURA BASICA) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Un documento HTML5 debe incluir:) Tj
+T*
+() Tj
+T*
+(- <!DOCTYPE html>) Tj
+T*
+(- <html>) Tj
+T*
+(- <head>) Tj
+T*
+(- <body>) Tj
+T*
+() Tj
+T*
+(ETIQUETAS Y ELEMENTOS VISTOS) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(- encabezados: <h1> a <h6>) Tj
+T*
+(- parrafos: <p>) Tj
+T*
+(- salto de linea: <br>) Tj
+T*
+(- span) Tj
+T*
+(- enlaces: <a>) Tj
+T*
+(- imagenes: <img>) Tj
+T*
+(- listas: <ul>, <ol>, <dl>) Tj
+T*
+(- tablas: <table>, <tr>, <th>, <td>) Tj
+T*
+(- iframe) Tj
+T*
+(- formularios) Tj
+T*
+(- etiquetas semanticas: <header>, <nav>, <main>, <section>, <article>, <aside>, <footer>) Tj
+T*
+(- audio y video) Tj
+T*
+() Tj
+T*
+(IDEAS TEORICAS IMPORTANTES) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(- HTML estructura el contenido) Tj
+T*
+(- CSS define presentacion) Tj
+T*
+(- JavaScript agrega comportamiento) Tj
+T*
+() Tj
+T*
+(FORMULARIOS) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(El material practica formularios con:) Tj
+T*
+() Tj
+T*
+(- texto) Tj
+T*
+(- contrasena) Tj
+T*
+(- numero) Tj
+T*
+(- radio) Tj
+T*
+(- checkbox) Tj
+T*
+(- select) Tj
+T*
+() Tj
+T*
+(Tambien aparece validacion HTML5 con atributos como:) Tj
+ET
+endstream
+endobj
+36 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 37 0 R >>
+endobj
+37 0 obj
+<< /Length 1151 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+50 792 Td
+() Tj
+T*
+(- required) Tj
+T*
+(- minlength) Tj
+T*
+(- maxlength) Tj
+T*
+(- placeholder) Tj
+T*
+(- min) Tj
+T*
+(- max) Tj
+T*
+() Tj
+T*
+(SEMANTICA) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Las etiquetas semanticas mejoran:) Tj
+T*
+() Tj
+T*
+(- organizacion del documento) Tj
+T*
+(- comprension del contenido) Tj
+T*
+(- mantenimiento) Tj
+T*
+() Tj
+T*
+(6. GIT Y GITHUB) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(La guia es de ejercicios, pero deja muy claro el flujo conceptual que tenes que dominar.) Tj
+T*
+() Tj
+T*
+(QUE ES GIT) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Git es un sistema de control de versiones.) Tj
+T*
+() Tj
+T*
+(Sirve para:) Tj
+T*
+() Tj
+T*
+(- registrar cambios) Tj
+T*
+(- conservar historial) Tj
+T*
+(- trabajar con ramas) Tj
+T*
+(- integrar trabajo) Tj
+T*
+(- revertir o analizar modificaciones) Tj
+T*
+(- colaborar en equipo) Tj
+T*
+() Tj
+T*
+(QUE ES GITHUB) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(GitHub es una plataforma remota para alojar repositorios Git y colaborar.) Tj
+T*
+() Tj
+T*
+(Diferencia corta:) Tj
+T*
+() Tj
+T*
+(- Git = sistema de versionado) Tj
+T*
+(- GitHub = plataforma para compartir y administrar repositorios Git) Tj
+T*
+() Tj
+T*
+(CONCEPTOS CLAVE) Tj
+T*
+() Tj
+T*
+() Tj
+ET
+endstream
+endobj
+38 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 39 0 R >>
+endobj
+39 0 obj
+<< /Length 1750 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+50 792 Td
+(- repositorio: proyecto versionado) Tj
+T*
+(- commit: registro puntual de cambios) Tj
+T*
+(- historial: secuencia de commits) Tj
+T*
+(- branch o rama: linea paralela de trabajo) Tj
+T*
+(- merge: integracion de ramas) Tj
+T*
+(- conflicto: choque entre cambios incompatibles) Tj
+T*
+(- remoto: repositorio alojado fuera del equipo local) Tj
+T*
+(- clonar: copiar un repositorio remoto al entorno local) Tj
+T*
+() Tj
+T*
+(IDEAS FUERTES QUE REMARCAN LOS EJERCICIOS) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(- los commits deben reflejar el proceso real) Tj
+T*
+(- los mensajes de commit deben ser claros y descriptivos) Tj
+T*
+(- deben verse las ramas creadas) Tj
+T*
+(- debe haber evidencia de merges) Tj
+T*
+(- hay que saber resolver conflictos manualmente) Tj
+T*
+() Tj
+T*
+(FLUJO DE TRABAJO QUE CUBRE LA GUIA) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(1. Crear carpeta e inicializar repositorio.) Tj
+T*
+(2. Crear y modificar archivos.) Tj
+T*
+(3. Registrar cambios.) Tj
+T*
+(4. Consultar historial.) Tj
+T*
+(5. Separar cambios en commits.) Tj
+T*
+(6. Crear ramas.) Tj
+T*
+(7. Volver a la rama principal.) Tj
+T*
+(8. Hacer merge.) Tj
+T*
+(9. Crear repo en GitHub.) Tj
+T*
+(10. Vincular repo local con remoto.) Tj
+T*
+(11. Subir cambios.) Tj
+T*
+(12. Clonar repo.) Tj
+T*
+(13. Simular trabajo colaborativo.) Tj
+T*
+(14. Generar y resolver conflictos.) Tj
+T*
+() Tj
+T*
+(CONFLICTOS) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Un conflicto aparece cuando dos cambios incompatibles afectan la misma parte del proyecto y Git) Tj
+T*
+(no puede decidir automaticamente cual conservar.) Tj
+T*
+() Tj
+T*
+(Resolver un conflicto implica:) Tj
+T*
+() Tj
+T*
+(- revisar las versiones en choque) Tj
+T*
+(- decidir que contenido queda) Tj
+T*
+(- guardar el archivo corregido) Tj
+T*
+(- registrar la resolucion) Tj
+T*
+() Tj
+ET
+endstream
+endobj
+40 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 41 0 R >>
+endobj
+41 0 obj
+<< /Length 1338 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+50 792 Td
+(7. INTEGRACION GENERAL DE TODOS LOS TEMAS) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(La relacion entre los contenidos se puede estudiar como un flujo unico:) Tj
+T*
+() Tj
+T*
+(1. Se crea y organiza un proyecto con VS Code, Node.js, Angular, Ionic y Capacitor.) Tj
+T*
+(2. La interfaz usa HTML, CSS y JavaScript.) Tj
+T*
+(3. La aplicacion consume una API REST.) Tj
+T*
+(4. La comunicacion se hace por HTTP.) Tj
+T*
+(5. Los datos viajan normalmente en JSON.) Tj
+T*
+(6. La autenticacion puede resolverse con JWT.) Tj
+T*
+(7. El proyecto se versiona y comparte con Git y GitHub.) Tj
+T*
+() Tj
+T*
+(Si en el parcial te piden explicar el ecosistema completo, esta cadena te ordena la respuesta.) Tj
+T*
+() Tj
+T*
+(8. TEMAS CON MAS PROBABILIDAD TEORICA) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Si tenes que priorizar:) Tj
+T*
+() Tj
+T*
+(1. JWT: definicion, estructura, autenticacion, autorizacion, stateless, access token, refresh) Tj
+T*
+(   token, seguridad basica.) Tj
+T*
+(2. APIs: API, cliente-servidor, REST, HTTP, JSON, codigos de estado, Postman.) Tj
+T*
+(3. JavaScript: que es, origen, ECMAScript, interpretado, tipado dinamico, Node.js.) Tj
+T*
+(4. Angular/Ionic/Capacitor: que hace cada uno y como se complementan.) Tj
+T*
+(5. Git/GitHub: diferencias, ramas, merge, conflicto, flujo de trabajo.) Tj
+T*
+(6. HTML: estructura y etiquetas principales.) Tj
+ET
+endstream
+endobj
+xref
+0 42
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000246 00000 n 
+0000000316 00000 n 
+0000000442 00000 n 
+0000002432 00000 n 
+0000002558 00000 n 
+0000004160 00000 n 
+0000004286 00000 n 
+0000005599 00000 n 
+0000005727 00000 n 
+0000007360 00000 n 
+0000007488 00000 n 
+0000008971 00000 n 
+0000009099 00000 n 
+0000010939 00000 n 
+0000011067 00000 n 
+0000012233 00000 n 
+0000012361 00000 n 
+0000013795 00000 n 
+0000013923 00000 n 
+0000015437 00000 n 
+0000015565 00000 n 
+0000017202 00000 n 
+0000017330 00000 n 
+0000018663 00000 n 
+0000018791 00000 n 
+0000020199 00000 n 
+0000020327 00000 n 
+0000021747 00000 n 
+0000021875 00000 n 
+0000023201 00000 n 
+0000023329 00000 n 
+0000024588 00000 n 
+0000024716 00000 n 
+0000025997 00000 n 
+0000026125 00000 n 
+0000027329 00000 n 
+0000027457 00000 n 
+0000029260 00000 n 
+0000029388 00000 n 
+trailer
+<< /Size 42 /Root 1 0 R >>
+startxref
+30779
+%%EOF
