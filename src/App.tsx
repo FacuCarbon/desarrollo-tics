@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { studySubjects } from './data/subjects'
 import { createDistinctQuizAttempt, getQuestionPool } from './lib/quiz'
 import type {
   QuestionOption,
   QuizAttemptQuestion,
+  StudyMaterialPdf,
   StudyMode,
   StudySubject,
 } from './types/study'
@@ -12,31 +13,60 @@ const quizSizeOptions = [5, 10, 15]
 type QuizFeedbackMode = 'afterAll' | 'perQuestion'
 const selectedSubjectStorageKey = 'study-subject-id'
 
+function getStoredSubject() {
+  if (typeof window === 'undefined') {
+    return null
+  }
+
+  const storedSubjectId = window.sessionStorage.getItem(selectedSubjectStorageKey)
+
+  if (!storedSubjectId) {
+    return null
+  }
+
+  const storedSubject =
+    studySubjects.find((subject) => subject.id === storedSubjectId) ?? null
+
+  if (!storedSubject) {
+    window.sessionStorage.removeItem(selectedSubjectStorageKey)
+  }
+
+  return storedSubject
+}
+
 function App() {
   const [mode, setMode] = useState<StudyMode>('home')
-  const [selectedSubjectId, setSelectedSubjectId] = useState<string | null>(() => {
-    if (typeof window === 'undefined') {
-      return null
-    }
-
-    return window.sessionStorage.getItem(selectedSubjectStorageKey)
-  })
-  const [isSubjectPickerOpen, setIsSubjectPickerOpen] = useState(() => {
-    if (typeof window === 'undefined') {
-      return true
-    }
-
-    return !window.sessionStorage.getItem(selectedSubjectStorageKey)
-  })
-  const [selectedModuleId, setSelectedModuleId] = useState('')
+  const [selectedSubjectId, setSelectedSubjectId] = useState<string | null>(
+    () => getStoredSubject()?.id ?? null,
+  )
+  const [isSubjectPickerOpen, setIsSubjectPickerOpen] = useState(
+    () => !getStoredSubject(),
+  )
+  const [selectedModuleId, setSelectedModuleId] = useState(
+    () => getStoredSubject()?.modules[0]?.id ?? '',
+  )
   const [quizModuleId, setQuizModuleId] = useState<string | 'all'>('all')
-  const [quizSize, setQuizSize] = useState(5)
+  const [quizSize, setQuizSize] = useState(() => {
+    const storedSubject = getStoredSubject()
+
+    return storedSubject ? Math.min(10, storedSubject.questions.length) : 5
+  })
   const [quizFeedbackMode, setQuizFeedbackMode] =
     useState<QuizFeedbackMode>('afterAll')
   const [pendingQuizModuleId, setPendingQuizModuleId] = useState<string | 'all' | null>(
     null,
   )
-  const [quizAttempt, setQuizAttempt] = useState<QuizAttemptQuestion[]>([])
+  const [quizAttempt, setQuizAttempt] = useState<QuizAttemptQuestion[]>(() => {
+    const storedSubject = getStoredSubject()
+
+    if (!storedSubject) {
+      return []
+    }
+
+    const defaultQuizSize = Math.min(10, storedSubject.questions.length)
+
+    return createDistinctQuizAttempt(storedSubject.questions, 'all', defaultQuizSize)
+  })
   const [answers, setAnswers] = useState<Record<string, string>>({})
   const [revealedAnswers, setRevealedAnswers] = useState<Record<string, boolean>>({})
   const [submitted, setSubmitted] = useState(false)
@@ -81,34 +111,11 @@ function App() {
   }, [activePool.length])
 
   const isPerQuestionMode = quizFeedbackMode === 'perQuestion'
+  const selectedMaterialCount = selectedSubject?.materialPdfs?.length ?? 0
   const unanswered = quizAttempt.length - Object.keys(answers).length
   const score = quizAttempt.reduce((accumulator, question) => {
     return answers[question.id] === question.correctOptionId ? accumulator + 1 : accumulator
   }, 0)
-
-  useEffect(() => {
-    if (!selectedSubjectId) {
-      return
-    }
-
-    const nextSubject = studySubjects.find((subject) => subject.id === selectedSubjectId)
-
-    if (!nextSubject) {
-      window.sessionStorage.removeItem(selectedSubjectStorageKey)
-      return
-    }
-
-    const firstModuleId = nextSubject.modules[0]?.id ?? ''
-    const defaultQuizSize = Math.min(10, nextSubject.questions.length)
-
-    setSelectedModuleId((current) => current || firstModuleId)
-    setQuizSize((current) => (current > 0 ? current : defaultQuizSize))
-    setQuizAttempt((current) =>
-      current.length > 0
-        ? current
-        : createDistinctQuizAttempt(nextSubject.questions, 'all', defaultQuizSize),
-    )
-  }, [selectedSubjectId])
 
   const activateSubject = (subjectId: string, nextMode: StudyMode = 'home') => {
     const nextSubject = studySubjects.find((subject) => subject.id === subjectId)
@@ -208,9 +215,18 @@ function App() {
     }
   }
 
+  const openMaterials = () => {
+    setMode('home')
+    window.setTimeout(() => {
+      document
+        .getElementById('materiales-oficiales')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 0)
+  }
+
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,#1d4ed8_0%,#0f172a_38%,#020617_100%)] text-slate-100">
-      <div className="mx-auto flex min-h-screen w-full max-w-[1500px] flex-col px-3 py-6 sm:px-4 lg:px-5">
+    <main className="min-h-dvh bg-[radial-gradient(circle_at_top,#1d4ed8_0%,#0f172a_38%,#020617_100%)] text-slate-100">
+      <div className="mx-auto flex min-h-dvh w-full max-w-[1500px] flex-col px-3 py-4 sm:px-4 sm:py-6 lg:px-5">
         <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/6 shadow-2xl shadow-slate-950/30 backdrop-blur">
           <div className="border-b border-white/10 px-6 py-6 sm:px-8">
             <div className="mb-5 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
@@ -221,12 +237,12 @@ function App() {
                 <h1 className="max-w-3xl text-4xl font-black tracking-tight text-white sm:text-5xl">
                   {selectedSubject
                     ? `${selectedSubject.title}: teoría + mini exámenes explicados`
-                    : 'Elegí si querés estudiar TICs o Mobile + Frontend'}
+                    : 'Elegí qué bloque querés estudiar'}
                 </h1>
                 <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base">
                   {selectedSubject
                     ? selectedSubject.description
-                    : 'El proyecto ahora arranca preguntando qué materia querés preparar. Después reutiliza el mismo formato: módulos para estudiar, preguntas guiadas y simulaciones con corrección explicada.'}
+                    : 'El proyecto separa cada materia y parcial para que puedas preparar teoría, machete y mini exámenes sin mezclar contenidos.'}
                 </p>
               </div>
 
@@ -238,6 +254,12 @@ function App() {
                     value={String(selectedSubject.questions.length)}
                   />
                   <MetricCard label="Examen actual" value={`${quizSize} preguntas random`} />
+                  {selectedMaterialCount > 0 ? (
+                    <MetricCard
+                      label="PDFs del parcial"
+                      value={String(selectedMaterialCount)}
+                    />
+                  ) : null}
                 </div>
               ) : null}
             </div>
@@ -282,13 +304,24 @@ function App() {
                   >
                     Hacer examen random
                   </button>
-                  <a
-                    href={selectedSubject.summaryPdf}
-                    download
-                    className="rounded-full border border-cyan-300/35 bg-cyan-300/10 px-4 py-2 text-sm font-semibold text-cyan-100 transition hover:border-cyan-200 hover:bg-cyan-300/15"
-                  >
-                    Descargar resumen PDF
-                  </a>
+                  {selectedSubject.summaryPdf ? (
+                    <a
+                      href={selectedSubject.summaryPdf}
+                      download
+                      className="rounded-full border border-cyan-300/35 bg-cyan-300/10 px-4 py-2 text-sm font-semibold text-cyan-100 transition hover:border-cyan-200 hover:bg-cyan-300/15"
+                    >
+                      Descargar resumen PDF
+                    </a>
+                  ) : null}
+                  {selectedSubject.materialPdfs?.length ? (
+                    <button
+                      type="button"
+                      onClick={openMaterials}
+                      className="rounded-full border border-amber-300/35 bg-amber-300/10 px-4 py-2 text-sm font-semibold text-amber-100 transition hover:border-amber-200 hover:bg-amber-300/15"
+                    >
+                      Ver PDFs del parcial
+                    </button>
+                  ) : null}
                 </>
               ) : null}
             </nav>
@@ -301,14 +334,14 @@ function App() {
                   Elegí la materia
                 </p>
                 <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-200">
-                  Apenas entrás, la app ahora te deja elegir si querés estudiar
-                  TICs o Desarrollo Mobile y Frontend. Una vez elegida la materia,
-                  se desbloquean los módulos de teoría, las preguntas rápidas y los
-                  mini exámenes con explicación.
+                  Apenas entrás, la app te deja elegir qué bloque preparar. TICs
+                  del primer parcial queda separado de TICs del segundo parcial,
+                  para estudiar Linux, Apache y Docker sin mezclarlo con redes y
+                  sociedad de la información.
                 </p>
               </div>
 
-              <div className="grid gap-4 xl:grid-cols-2">
+              <div className="grid gap-4 xl:grid-cols-3">
                 {studySubjects.map((subject) => (
                   <SubjectSelectorCard
                     key={subject.id}
@@ -337,6 +370,10 @@ function App() {
                       <p>4. La corrección devuelve explicación útil, no solo si está bien o mal.</p>
                     </div>
                   </div>
+
+                  {selectedSubject.materialPdfs?.length ? (
+                    <MaterialsSection materials={selectedSubject.materialPdfs} />
+                  ) : null}
 
                   <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                     {selectedSubject.modules.map((module) => (
@@ -779,8 +816,8 @@ function App() {
       </div>
 
       {pendingQuizModuleId !== null && selectedSubject ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/75 px-4 backdrop-blur-sm">
-          <div className="w-full max-w-2xl rounded-[1.75rem] border border-white/10 bg-slate-900 p-6 shadow-2xl shadow-slate-950/40">
+        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-slate-950/75 px-3 py-4 backdrop-blur-sm sm:items-center sm:px-4">
+          <div className="max-h-[calc(100dvh-2rem)] w-full max-w-2xl overflow-y-auto rounded-[1.75rem] border border-white/10 bg-slate-900 p-5 shadow-2xl shadow-slate-950/40 sm:p-6">
             <p className="text-xs uppercase tracking-[0.24em] text-cyan-200">
               Antes de arrancar
             </p>
@@ -850,8 +887,8 @@ function App() {
       ) : null}
 
       {isSubjectPickerOpen ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/75 px-4 backdrop-blur-sm">
-          <div className="w-full max-w-3xl rounded-[1.75rem] border border-white/10 bg-slate-900 p-6 shadow-2xl shadow-slate-950/40">
+        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-slate-950/75 px-3 py-4 backdrop-blur-sm sm:items-center sm:px-4">
+          <div className="max-h-[calc(100dvh-2rem)] w-full max-w-3xl overflow-y-auto rounded-[1.75rem] border border-white/10 bg-slate-900 p-5 shadow-2xl shadow-slate-950/40 sm:p-6">
             <p className="text-xs uppercase tracking-[0.24em] text-cyan-200">
               Antes de empezar
             </p>
@@ -902,8 +939,8 @@ function App() {
           <div>
             <p className="font-semibold text-white">Preparador de materias</p>
             <p className="mt-1 text-slate-400">
-              Ahora el proyecto permite elegir entre TICs y Desarrollo Mobile +
-              Frontend, manteniendo teoría guiada y mini exámenes explicados.
+              El proyecto separa materias y parciales, manteniendo teoría guiada,
+              machetes y mini exámenes explicados por bloque.
             </p>
           </div>
 
@@ -997,6 +1034,45 @@ function ExampleCard({
   )
 }
 
+function MaterialsSection({ materials }: { materials: StudyMaterialPdf[] }) {
+  return (
+    <section
+      id="materiales-oficiales"
+      className="scroll-mt-6 rounded-[1.75rem] border border-amber-300/20 bg-amber-300/10 p-6"
+    >
+      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-100">
+        Material oficial del parcial
+      </p>
+      <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-200">
+        PDFs separados del bloque anterior para estudiar solo los temas del segundo parcial.
+      </p>
+      <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {materials.map((material) => (
+          <MaterialPdfCard key={material.href} material={material} />
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function MaterialPdfCard({ material }: { material: StudyMaterialPdf }) {
+  return (
+    <a
+      href={material.href}
+      target="_blank"
+      rel="noreferrer"
+      className="group rounded-[1.5rem] border border-white/10 bg-slate-950/35 p-5 transition hover:border-amber-200/45 hover:bg-amber-200/10"
+    >
+      <p className="text-xs uppercase tracking-[0.2em] text-amber-100">PDF</p>
+      <h3 className="mt-3 text-lg font-bold text-white transition group-hover:text-amber-50">
+        {material.title}
+      </h3>
+      <p className="mt-3 text-sm leading-6 text-slate-300">{material.description}</p>
+      <p className="mt-4 text-sm font-semibold text-amber-100">Abrir material</p>
+    </a>
+  )
+}
+
 function CheatSheetCard({
   title,
   bullets,
@@ -1042,6 +1118,12 @@ function SubjectSelectorCard({
       </p>
       <h2 className="mt-3 text-2xl font-black text-white">{subject.title}</h2>
       <p className="mt-4 text-sm leading-6 text-slate-300">{subject.description}</p>
+
+      {subject.materialPdfs?.length ? (
+        <p className="mt-4 inline-flex rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-amber-100">
+          {subject.materialPdfs.length} PDFs oficiales
+        </p>
+      ) : null}
 
       <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
         <button

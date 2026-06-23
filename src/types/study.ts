@@ -5,10 +5,17 @@ export interface StudySubject {
   title: string
   shortLabel: string
   description: string
-  summaryPdf: string
+  summaryPdf?: string
+  materialPdfs?: StudyMaterialPdf[]
   modules: StudyModule[]
   questions: QuizQuestion[]
   cheatSheetSections?: CheatSheetSection[]
+}
+
+export interface StudyMaterialPdf {
+  title: string
+  description: string
+  href: string
 }
 
 export interface StudyModule {
