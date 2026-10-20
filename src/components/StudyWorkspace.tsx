@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { ProgressTools } from './ProgressTools'
+import { SubjectPicker } from './SubjectPicker'
 import { QuizRunner } from './QuizRunner'
 import type { NotebookQuiz } from './QuizRunner'
 import { NotebookIcon } from './NotebookIcon'
@@ -52,8 +53,8 @@ export function StudyWorkspace({ subjects, subject, module, mode, onMode, onSubj
     <a className="skip-link" href="#workspace-content">Ir al contenido</a>
     <aside className="notebook-sidebar">
       <a className="notebook-brand" href="#" onClick={(event) => { event.preventDefault(); onMode('home') }}><span className="brand-mark"><NotebookIcon name="book" size={23} /></span><span>Apuntes<small>Teoría y práctica</small></span></a>
-      <label className="subject-label" htmlFor="subject-picker">Tu materia</label>
-      <select id="subject-picker" className="subject-select" value={subject?.id ?? ''} onChange={(event) => onSubject(event.target.value)}><option value="" disabled>Elegí una materia</option>{subjects.map((item) => <option key={item.id} value={item.id}>{item.shortLabel}</option>)}</select>
+      <span className="subject-label" id="subject-picker-label">Tu materia</span>
+      <SubjectPicker id="subject-picker" subjects={subjects} value={subject?.id ?? ''} onChange={onSubject} />
       <nav className="main-navigation" aria-label="Navegación principal">{navigation.map((item) => <button key={item.id} type="button" disabled={!subject} aria-current={active === item.id ? 'page' : undefined} onClick={() => onMode(item.mode)}><NotebookIcon name={item.icon} /><span>{item.title}</span>{active === item.id && <span className="nav-indicator" />}</button>)}</nav>
       {subject && <div className="sidebar-index"><p className="eyebrow">Índice de la materia <span>{subject.modules.length}</span></p>{subject.modules.map((item, index) => <button key={item.id} type="button" className={mode === 'study' && module?.id === item.id ? 'is-current' : ''} onClick={() => openModule(item.id)}><span className={`module-index ${reviewed.includes(item.id) ? 'is-reviewed' : ''}`}>{reviewed.includes(item.id) ? <NotebookIcon name="check" size={13} /> : String(index + 1).padStart(2, '0')}</span><span>{item.title}</span></button>)}</div>}
       <div className="sidebar-bottom">{progressTools(true)}<p className="sidebar-footnote">El avance se guarda en este navegador.</p></div>
@@ -61,7 +62,7 @@ export function StudyWorkspace({ subjects, subject, module, mode, onMode, onSubj
 
     <div className="notebook-main">
       <header className="notebook-topbar"><div className="topbar-context"><span className="mobile-brand"><NotebookIcon name="book" /> Apuntes</span><span className="desktop-context">Preparador de materias</span><span className="context-divider">/</span><span>{subject?.shortLabel ?? 'Materias'}</span></div><button type="button" className="icon-button" aria-label={theme === 'light' ? 'Activar modo oscuro' : 'Activar modo claro'} title={theme === 'light' ? 'Modo oscuro' : 'Modo claro'} onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}><NotebookIcon name={theme === 'light' ? 'moon' : 'sun'} /></button></header>
-      <div className="mobile-subject"><label htmlFor="mobile-subject">Materia</label><select id="mobile-subject" value={subject?.id ?? ''} onChange={(event) => onSubject(event.target.value)}><option value="" disabled>Elegí una materia</option>{subjects.map((item) => <option key={item.id} value={item.id}>{item.title}</option>)}</select></div>
+      <div className="mobile-subject"><span id="mobile-subject-label">Materia</span><SubjectPicker id="mobile-subject" subjects={subjects} value={subject?.id ?? ''} onChange={onSubject} /></div>
       {subject && active === 'study' && <nav className="study-subnav" aria-label="Recursos para estudiar"><button aria-current={mode === 'home' || mode === 'study' ? 'page' : undefined} onClick={() => onMode('home')}>Módulos</button>{isCloud && <button aria-current={mode === 'cloud-guide' && guideView === 'tables' ? 'page' : undefined} onClick={() => openGuide('tables')}>Tablas comparativas</button>}{subject.cheatSheetSections?.length ? <button aria-current={mode === 'cheatsheet' ? 'page' : undefined} onClick={() => onMode('cheatsheet')}>Repaso express</button> : null}{isCloud && <button aria-current={mode === 'cloud-guide' && guideView === 'sources' ? 'page' : undefined} onClick={() => openGuide('sources')}>Material de clase</button>}{subject.summaryPdf && <a href={subject.summaryPdf} download>Resumen PDF</a>}</nav>}
       <main id="workspace-content" className={`workspace-content ${mode === 'study' ? 'reading-workspace' : ''}`} tabIndex={-1}>
         {!subject ? <section className="welcome-page" data-study-content><p className="eyebrow">Material de estudio</p><h1>¿Qué materia<br />vas a preparar?</h1><p className="page-intro">Apuntes de clase, ejercicios y preguntas para practicar los parciales.</p><div className="subject-library">{subjects.map((item, index) => <button key={item.id} className="library-subject" onClick={() => onSubject(item.id, 'home')}><span className="item-number">{String(index + 1).padStart(2, '0')}</span><span><strong>{item.title}</strong><small>{item.modules.length} módulos · {item.questions.length} preguntas</small></span><NotebookIcon name="arrow" /></button>)}</div></section> : <>
