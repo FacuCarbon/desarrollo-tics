@@ -1,4 +1,4 @@
-export type StudyMode = 'home' | 'study' | 'quiz' | 'cheatsheet'
+export type StudyMode = 'home' | 'study' | 'quiz' | 'cheatsheet' | 'cloud-guide' | 'practice' | 'progress'
 
 export interface StudySubject {
   id: string
@@ -13,12 +13,15 @@ export interface StudySubject {
 }
 
 export interface StudyMaterialPdf {
+  format?: string
   title: string
   description: string
   href: string
 }
 
 export interface StudyModule {
+  supplementary?: { title: string; text: string; href: string }[]
+  sources?: { file: string; pages?: number[] }[]
   id: string
   title: string
   shortLabel: string
@@ -48,6 +51,8 @@ export interface QuestionOption {
 }
 
 export interface QuizQuestion {
+  sources?: { file: string; pages?: number[] }[]
+  sourceKind?: 'class' | 'clarification' | 'practice'
   id: string
   moduleId: string
   prompt: string

@@ -5,8 +5,10 @@ import {
   ticsSecondPartialQuestions,
 } from './ticsSecondPartialContent'
 import type { StudySubject } from '../types/study'
+import { cloudSubject } from './cloudContent'
 
 export const studySubjects: StudySubject[] = [
+  cloudSubject,
   {
     id: 'tics',
     title: 'TICs, redes y Linux',

@@ -1,0 +1,1828 @@
+[
+  {
+    "file": "actividad_practica_clase_5.docx",
+    "href": "/nube/actividad_practica_clase_5.docx",
+    "sha256": "6b54bbb5b086c6a027588f9a74a58ecf1ab9b8accc74e2d9aed26439fd2f7d02",
+    "pages": [
+      {
+        "number": 1,
+        "paragraphs": [
+          "Actividad prácticaIaaS, PaaS, SaaS y On-Premise",
+          "Análisis y selección de infraestructura tecnológica",
+          "Nombre y apellido: ___________________________________________________________________________",
+          "Grupo: ___________________________________________________________________________",
+          "Fecha: ___________________________________________________________________________",
+          "Objetivo",
+          "Aplicar los conceptos de On-Premise, IaaS, PaaS y SaaS a situaciones reales, evaluando qué modelo resulta más adecuado según los requisitos técnicos y del negocio.",
+          "Consigna general",
+          "Analicen cada escenario como responsables de arquitectura o infraestructura. Para cada caso deberán elegir una alternativa (On-Premise, IaaS, PaaS o SaaS) y justificarla. No alcanza con indicar el modelo: deben explicar por qué lo elegirían y qué alternativa descartarían.",
+          "Caso",
+          "Organización",
+          "Situación",
+          "1",
+          "Instituto educativo",
+          "Un instituto de 300 alumnos necesita correo, calendario, almacenamiento de archivos y videollamadas. Tiene solamente 2 personas de IT y quiere implementarlo rápidamente.",
+          "2",
+          "Sistema bancario antiguo",
+          "Un banco posee una aplicación desarrollada hace 15 años. Necesita Windows Server, configuraciones especiales del SO y una base de datos particular. No puede modificar la aplicación por ahora.",
+          "3",
+          "Startup",
+          "Una empresa de 5 personas desarrolla una aplicación web. Espera pasar de 500 a 100.000 usuarios rápidamente. No quiere administrar servidores ni sistemas operativos.",
+          "4",
+          "Industria",
+          "Una fábrica posee un sistema que controla equipamiento industrial. Una interrupción de Internet no puede impedir que continúe funcionando y necesita integración directa con equipos de planta.",
+          "Escenarios - continuación",
+          "Caso",
+          "Organización",
+          "Situación",
+          "5",
+          "Desarrollo web",
+          "Un equipo necesita publicar una API desarrollada en Python. Quiere concentrarse en el código y que otra plataforma administre SO, actualizaciones y escalamiento.",
+          "6",
+          "Empresa pequeña",
+          "Una empresa necesita un CRM para ventas. No desarrolla software y quiere comenzar a utilizarlo esta misma semana.",
+          "7",
+          "Videojuego",
+          "Un juego online tiene normalmente 2.000 jugadores, pero durante eventos puede llegar a 80.000. Necesita aumentar y reducir recursos según demanda.",
+          "8",
+          "Organismo con sistema propio",
+          "Posee una aplicación que necesita configuraciones particulares de red, firewall, SO y servidores. Quiere migrarla a cloud realizando inicialmente la menor cantidad posible de cambios.",
+          "Hoja de resolución",
+          "Completen una ficha por cada escenario. Justifiquen la elección utilizando los requisitos del caso.",
+          "Caso 1",
+          "Solución elegida",
+          "¿Por qué?",
+          "¿Qué administra la organización?",
+          "¿Qué administra el proveedor?",
+          "Principal ventaja",
+          "Alternativa descartada y motivo",
+          "Caso 2",
+          "Solución elegida",
+          "¿Por qué?",
+          "¿Qué administra la organización?",
+          "¿Qué administra el proveedor?",
+          "Principal ventaja",
+          "Alternativa descartada y motivo",
+          "Hoja de resolución - continuación",
+          "Caso 3",
+          "Solución elegida",
+          "¿Por qué?",
+          "¿Qué administra la organización?",
+          "¿Qué administra el proveedor?",
+          "Principal ventaja",
+          "Alternativa descartada y motivo",
+          "Caso 4",
+          "Solución elegida",
+          "¿Por qué?",
+          "¿Qué administra la organización?",
+          "¿Qué administra el proveedor?",
+          "Principal ventaja",
+          "Alternativa descartada y motivo",
+          "Hoja de resolución - continuación",
+          "Caso 5",
+          "Solución elegida",
+          "¿Por qué?",
+          "¿Qué administra la organización?",
+          "¿Qué administra el proveedor?",
+          "Principal ventaja",
+          "Alternativa descartada y motivo",
+          "Caso 6",
+          "Solución elegida",
+          "¿Por qué?",
+          "¿Qué administra la organización?",
+          "¿Qué administra el proveedor?",
+          "Principal ventaja",
+          "Alternativa descartada y motivo",
+          "Hoja de resolución - continuación",
+          "Caso 7",
+          "Solución elegida",
+          "¿Por qué?",
+          "¿Qué administra la organización?",
+          "¿Qué administra el proveedor?",
+          "Principal ventaja",
+          "Alternativa descartada y motivo",
+          "Caso 8",
+          "Solución elegida",
+          "¿Por qué?",
+          "¿Qué administra la organización?",
+          "¿Qué administra el proveedor?",
+          "Principal ventaja",
+          "Alternativa descartada y motivo",
+          "Desafío 2 - Cambian las condiciones",
+          "Revisen la decisión original. Para cada cambio indiquen si mantienen el modelo elegido o si lo modificarían, y expliquen por qué.",
+          "Escenario",
+          "Nueva condición",
+          "¿Mantienen?",
+          "Justificación",
+          "Instituto educativo",
+          "Una regulación interna establece que determinada información debe permanecer físicamente dentro de la institución.",
+          "Videojuego",
+          "La cantidad de jugadores pasa a ser completamente estable durante todo el año.",
+          "Startup",
+          "La empresa contrata un equipo de infraestructura y necesita controlar personalmente el sistema operativo.",
+          "Sistema industrial",
+          "El sistema deja de controlar equipamiento físico y pasa a ser solamente una aplicación administrativa.",
+          "Desafío 3 - Diseñen una solución híbrida",
+          "Una empresa tiene presupuesto limitado y necesita resolver cinco servicios. No es obligatorio utilizar el mismo modelo para todo. Elijan la opción más adecuada para cada componente.",
+          "Necesidad",
+          "Modelo elegido",
+          "Justificación",
+          "Riesgo / desventaja",
+          "Servidor web",
+          "Base de datos",
+          "Correo corporativo",
+          "Almacenamiento de documentos",
+          "Aplicación propia",
+          "Cierre - Comparación de modelos",
+          "Comparen On-Premise, IaaS, PaaS y SaaS según los criterios. Utilicen Bajo / Medio / Alto cuando corresponda y agreguen una breve explicación oral durante la puesta en común.",
+          "Criterio",
+          "On-Premise",
+          "IaaS",
+          "PaaS",
+          "SaaS",
+          "Control del cliente",
+          "Responsabilidad de mantenimiento",
+          "Velocidad de implementación",
+          "Escalabilidad",
+          "Necesidad de personal técnico",
+          "Pregunta final",
+          "¿Existe un modelo que sea siempre mejor que los demás? Expliquen su respuesta utilizando al menos dos de los escenarios trabajados."
+        ],
+        "notes": []
+      }
+    ]
+  },
+  {
+    "file": "CLASE_1y2.pptx",
+    "href": "/nube/CLASE_1y2.pptx",
+    "sha256": "801f8a84e27a27d194143d998a7e317cb8de2df580c8a43d72c5fdbffd271daf",
+    "pages": [
+      {
+        "number": 1,
+        "paragraphs": [],
+        "notes": [],
+        "images": [
+          "/nube/CLASE_1y2-image12.jpeg"
+        ]
+      },
+      {
+        "number": 2,
+        "paragraphs": [
+          "Nos gustaría conocerlos un poco…",
+          "¿Qué esperan aprender y llevarse de esta asignatura ?",
+          "¿Quiénes están actualmente trabajando?",
+          "¿Quiénes están trabajando en Tecnología y que rol desarrollan en la compañía?",
+          "Infraestructura?",
+          "DevSecOps?",
+          "Desarrollo?",
+          "AI/ML?"
+        ],
+        "notes": [
+          "3"
+        ],
+        "images": []
+      },
+      {
+        "number": 3,
+        "paragraphs": [
+          "Tema 1: Tecnologías Digitales"
+        ],
+        "notes": [
+          "4"
+        ],
+        "images": [
+          "/nube/CLASE_1y2-image13.jpeg"
+        ]
+      },
+      {
+        "number": 4,
+        "paragraphs": [
+          "TECNOLOGÍA",
+          "¿Qué es la Tecnología?"
+        ],
+        "notes": [
+          "5"
+        ],
+        "images": [
+          "/nube/CLASE_1y2-image14.jpeg",
+          "/nube/CLASE_1y2-image17.jpeg",
+          "/nube/CLASE_1y2-image16.jpeg",
+          "/nube/CLASE_1y2-image15.jpeg"
+        ]
+      },
+      {
+        "number": 5,
+        "paragraphs": [
+          "Las tecnologías sirven para resolver problemas, simplificar tareas, entretener, mejorar la comunicación, potenciar la productividad, facilitar el acceso a la información, fomentar la creatividad, aumentar la eficiencia energética, entre otros. ",
+          "Las tecnologías digitales en particular han revolucionado diversos sectores, como la educación, la salud, el comercio, la industria y el entretenimiento, proporcionando nuevas formas de interacción y oportunidades de desarrollo.",
+          "Según Internet…"
+        ],
+        "notes": [
+          "6"
+        ],
+        "images": []
+      },
+      {
+        "number": 6,
+        "paragraphs": [
+          "Según ChatGPT…",
+          "La tecnología es el conjunto de conocimientos, herramientas y procesos que se aplican en la creación, uso y modificación de sistemas, objetos y servicios para resolver problemas  o satisfacer necesidades humanas. "
+        ],
+        "notes": [
+          "7"
+        ],
+        "images": [
+          "/nube/CLASE_1y2-image18.jpg"
+        ]
+      },
+      {
+        "number": 7,
+        "paragraphs": [
+          "La Tecnología se define como el conjunto de conocimientos y técnicas que, aplicados de forma lógica y ordenada, permiten al ser humano modificar su entorno material o virtual para satisfacer sus necesidades, esto es, un proceso combinado de pensamiento y acción con la finalidad de crear soluciones útiles.",
+          "Según PEAPT (Plataforma Estatal de Asociaciones del Profesorado de Tecnología) …"
+        ],
+        "notes": [
+          "8"
+        ],
+        "images": []
+      },
+      {
+        "number": 8,
+        "paragraphs": [
+          "Satisfacer necesidades",
+          "Resolver problemas",
+          "DescubrirIndagar",
+          "CienciaConocimiento",
+          "Herramientas",
+          "Técnica",
+          "CrearDesarrollar",
+          "BienesProductosServicios",
+          "Solución",
+          "Tecnología"
+        ],
+        "notes": [
+          "9"
+        ],
+        "images": [
+          "/nube/CLASE_1y2-image19.png",
+          "/nube/CLASE_1y2-image20.png"
+        ]
+      },
+      {
+        "number": 9,
+        "paragraphs": [
+          "Herramientas",
+          "Disrupción",
+          "+ Inteligencia",
+          "Para procesar, analizar y almacenar información digitalizada.",
+          "Dispositivos. Computadoras, servidores, teléfonos móviles y tabletas.",
+          "Sistemas Digitales consolidadosCloud Computing",
+          "Internet de las cosas (IoT)",
+          "Blockchain",
+          "Realidad Virtual y Aumentada, Metaverso. Computación cuántica",
+          "Impresión 3D",
+          "Robótica avanzada",
+          "Biología sintética",
+          "Energía renovable Nanotecnología",
+          "Para cambiar los modelos de negocio.",
+          "Para modificar nuestras tareas diarias.",
+          "Para cambiar el trabajo como lo conocemos.",
+          "Para transformar las industrias.",
+          "Para cambiar la forma en la que nos relacionamos socialmente.",
+          "Para modificar nuestro entorno físico y virtual.",
+          "Para generar impacto social, político y económico en nuestras vidas.",
+          "Para comunicarnos, tomar decisiones, hacer negocios, entretenernos y emocionarnos.",
+          "Instagram, You Tube, Google, Spotify, Mercado Libre, Waze, ChatGPT, Netflix, WhatsApp, Siri, etc.",
+          "Aumentar la eficiencia.",
+          "Mejorar la calidad.",
+          "Incrementar la competitividad.",
+          "Mejorar la experiencia del usuario.",
+          "Fomentar la colaboración.",
+          "Un medio",
+          "Tecnología"
+        ],
+        "notes": [
+          "10"
+        ],
+        "images": []
+      },
+      {
+        "number": 10,
+        "paragraphs": [
+          "Principales ventajas de las tecnologías:",
+          "Automatización: Permiten realizar tareas de forma más rápida y precisa, reduciendo la intervención humana.",
+          "Acceso a la información: Facilitan el acceso a grandes cantidades de información y conocimiento en tiempo real.",
+          "Comunicación: Mejoran la comunicación a distancia, permitiendo conectarse con personas de todo el mundo.",
+          "Eficiencia y productividad: Optimizan procesos y aumentan la eficiencia, lo que conduce a una mayor productividad.",
+          "Innovación: Proporcionan herramientas para la creación y desarrollo de nuevas soluciones y productos.",
+          "Sin embargo, también existen desventajas asociadas con las tecnologías, como:",
+          "Dependencia: La dependencia excesiva de la tecnología puede llevar a la pérdida de habilidades manuales o sociales.",
+          "Brecha digital: No todas las personas tienen acceso equitativo a las tecnologías, lo que puede generar una brecha entre diferentes grupos sociales.",
+          "Privacidad y seguridad: El uso de tecnologías digitales puede plantear preocupaciones sobre la privacidad de los datos y la seguridad cibernética.",
+          "Impacto ambiental: La producción y disposición de tecnologías pueden generar residuos y contribuir al cambio climático.",
+          "Desempleo tecnológico: La automatización y la adopción de tecnologías emergentes como la IA pueden reemplazar ciertos puestos de trabajo, lo que puede tener implicaciones sociales y económicas.",
+          "Ventajas y desventajas de las tecnologías"
+        ],
+        "notes": [
+          "11"
+        ],
+        "images": []
+      },
+      {
+        "number": 11,
+        "paragraphs": [
+          "\"La tecnología se convierte en arte cuando desaparece. Cuando se vuelve tan intuitiva y fácil de usar que se convierte en una extensión natural de nosotros mismos\".",
+          "Por Steve Jobs",
+          "\"La tecnología es simplemente una herramienta, que en manos equivocadas puede ser perjudicial, pero en las manos correctas puede ser transformadora\"."
+        ],
+        "notes": [
+          "12"
+        ],
+        "images": [
+          "/nube/CLASE_1y2-image21.jpeg"
+        ]
+      },
+      {
+        "number": 12,
+        "paragraphs": [
+          "Evolución de las tecnologías"
+        ],
+        "notes": [
+          "13"
+        ],
+        "images": [
+          "/nube/CLASE_1y2-image22.jpeg"
+        ]
+      },
+      {
+        "number": 13,
+        "paragraphs": [
+          "13 | Sistemas Digitales.",
+          "1760",
+          "1840",
+          "1914",
+          "1990",
+          "80 años",
+          "74 años",
+          "55 años",
+          "2023",
+          "33 años"
+        ],
+        "notes": [
+          "14"
+        ],
+        "images": [
+          "/nube/CLASE_1y2-image23.png",
+          "/nube/CLASE_1y2-image24.png"
+        ]
+      },
+      {
+        "number": 14,
+        "paragraphs": [
+          "Velocidad de la Transformación Digital"
+        ],
+        "notes": [
+          "15"
+        ],
+        "images": [
+          "/nube/CLASE_1y2-image25.png",
+          "/nube/CLASE_1y2-image26.png"
+        ]
+      },
+      {
+        "number": 15,
+        "paragraphs": [],
+        "notes": [
+          "16"
+        ],
+        "images": [
+          "/nube/CLASE_1y2-image27.png"
+        ]
+      },
+      {
+        "number": 16,
+        "paragraphs": [
+          "Son desarrollos y tecnologías que aprovechan el poder de la digitalización y las tecnologías de la información para impulsar la cuarta revolución industrial. Estas tendencias se agrupan en tres grandes categorías: Físicas, Digitales y Biológicas, y están muy interrelacionadas entre sí.",
+          "¿Cuáles son las Megatendencias?",
+          "Según Klaus Schwab en su libro “La cuarta revolución industrial”, expresa que existen tres impulsores que cambiarán la industria en los próximos años."
+        ],
+        "notes": [
+          "17"
+        ],
+        "images": [
+          "/nube/CLASE_1y2-image28.png"
+        ]
+      },
+      {
+        "number": 17,
+        "paragraphs": [
+          "16 | Sistemas Digitales.",
+          "¿Cuál es el impulsor Físico?",
+          "Vehículos autónomos"
+        ],
+        "notes": [
+          "18"
+        ],
+        "images": [
+          "/nube/CLASE_1y2-image34.jpeg",
+          "/nube/CLASE_1y2-image29.jpeg",
+          "/nube/CLASE_1y2-image33.jpeg",
+          "/nube/CLASE_1y2-image32.jpeg",
+          "/nube/CLASE_1y2-image37.jpeg",
+          "/nube/CLASE_1y2-image31.png",
+          "/nube/CLASE_1y2-image36.jpeg",
+          "/nube/CLASE_1y2-image30.png",
+          "/nube/CLASE_1y2-image35.jpeg"
+        ]
+      },
+      {
+        "number": 18,
+        "paragraphs": [
+          "16 | Sistemas Digitales.",
+          "¿Cuál es el impulsor Físico?",
+          "Impresión 3D",
+          "Robótica avanzada"
+        ],
+        "notes": [
+          "19"
+        ],
+        "images": [
+          "/nube/CLASE_1y2-image43.jpeg",
+          "/nube/CLASE_1y2-image38.jpeg",
+          "/nube/CLASE_1y2-image42.jpeg",
+          "/nube/CLASE_1y2-image41.jpeg",
+          "/nube/CLASE_1y2-image46.jpeg",
+          "/nube/CLASE_1y2-image40.jpeg",
+          "/nube/CLASE_1y2-image45.jpeg",
+          "/nube/CLASE_1y2-image39.png",
+          "/nube/CLASE_1y2-image44.jpeg"
+        ]
+      },
+      {
+        "number": 19,
+        "paragraphs": [
+          "Cloud Computing: Servicios de computación a través de Internet. Usuarios consumen recursos y servicios sin requerir infraestructuras propias.",
+          "Internet de las cosas (IoT): Dispositivos físicos interconectados para monitorear y controlar activos y actividades.",
+          "Big Data: Refiere a grandes conjuntos de datos complejos que requieren herramientas especializadas para su procesamiento y análisis, revelando patrones y conocimientos relevantes sobre comportamientos y consumos de los usuarios.",
+          "Blockchain: Protocolo seguro que permite verifica transacciones sin autoridad central, utilizado en aplicaciones financieras como Bitcoin, certificados, títulos de propiedad y procesos médicos entre otros.",
+          "Realidad Aumentada: Combina elementos del mundo real con elementos virtuales para mejorar la percepción de la realidad.",
+          "Realidad Virtual: Simulación computarizada inmersiva que recrea un entorno tridimensional donde los usuarios pueden sumergirse y explorar.",
+          "Plataformas tecnológicas: Facilitan la conexión de personas, activos y datos, y crean nuevas formas de consumo de bienes y servicios. Ejemplos Uber, Spotify, Netflix, han transformado la forma en que las personas acceden a servicios.",
+          "¿Cuál es el impulsor Digital?"
+        ],
+        "notes": [
+          "20"
+        ],
+        "images": []
+      },
+      {
+        "number": 20,
+        "paragraphs": [
+          "¿Cuál es el impulsor Biológica?",
+          "Innovaciones en Genética:",
+          "Reducción del costo y facilidad de secuenciación genética ADN.Proyecto Genoma Humano tomó más de diez años y 2.700 millones de dólares.Hoy, un genoma se secuencia en pocas horas y por menos de 1.000 dólares.",
+          "Biología sintética:",
+          "Permite la personalización de organismos mediante la configuración del ADN.",
+          "Revolución en medicina personalizada:",
+          "Mejora en el tratamiento del cáncer al determinar la constitución genética de un tumor.",
+          "Medicina más precisa y terapias dirigidas.",
+          "Ingeniería genética:",
+          "Más precisa, eficaz y fácil de usar.",
+          "Limitaciones jurídicas, regulatorias y éticas.",
+          "Modificación de animales y creación de cultivos resistentes.",
+          "Diseño de animales para producir productos farmacéuticos y órganos de trasplante."
+        ],
+        "notes": [
+          "21"
+        ],
+        "images": []
+      },
+      {
+        "number": 21,
+        "paragraphs": [
+          "+",
+          "=",
+          "Industria 5.0",
+          "Colaboración entre la IA y humanos para mejorar la productividad y la eficiencia. ",
+          "IA y ML"
+        ],
+        "notes": [
+          "22"
+        ],
+        "images": [
+          "/nube/CLASE_1y2-image47.jpeg",
+          "/nube/CLASE_1y2-image50.png",
+          "/nube/CLASE_1y2-image49.jpeg",
+          "/nube/CLASE_1y2-image48.jpeg"
+        ]
+      },
+      {
+        "number": 22,
+        "paragraphs": [
+          "Capacidad de resolver problemas",
+          "1",
+          "Abordaje metodológico",
+          "2",
+          "Trabajo en equipo",
+          "3",
+          "Capacidad de aprender",
+          "4",
+          "Creatividad e innovación",
+          "7",
+          "Negociación",
+          "8",
+          "Pasión",
+          "9",
+          "Adaptabilidad",
+          "6",
+          "Inteligencia emocional",
+          "5",
+          "Cualidades y aptitudes requeridas en los profesionales de IT.",
+          "Resiliencia.",
+          "Sólido conocimiento técnico.",
+          "Pensamiento crítico, lógico y analítico.",
+          "Análisis de causas y efectos, ¿5 Porque´s?, Matriz de Eisenhower, 6M, 5S y otros.",
+          "Estrategia y táctica. OKR, PDCA y BPM.",
+          "Apertura y humildad.",
+          "Metodologías ágiles. Design Thinking, Scrum, Kanban y otros.",
+          "Desaprender y volver a aprender.",
+          "Diciplina y autogestión.",
+          "Relaciones interpersonales, empatía.",
+          "Escucha activa.",
+          "Comunicaciones asertivas.",
+          "Capacidad de adaptarse a los cambios.",
+          "Aprendizaje autodirigido.",
+          "Visualizar e imaginar soluciones diferentes.",
+          "Pensamiento lateral.",
+          "Preparación previa.",
+          "Identificación de intereses comunes.",
+          "Orientado a resultados.",
+          "\"Si te dedicas a aquello que te gusta y te apasiona, no es necesario contar con ningún plan maestro para alcanzar el éxito\" ",
+          "Mark Zuckerberg Cofundador / CEO de Facebook.",
+          "\"Stay hungry, stay foolish““Quédate con hambre, sigue alocado”. Sé insaciable, aventúrate. Haz lo que no se atreven a hacer los demás.Piensa fuera de la caja. Nunca te conformes. Sigue asombrándote como si fueras un niño…",
+          "\t\t\t\tSteve Jobs"
+        ],
+        "notes": [],
+        "images": []
+      }
+    ]
+  },
+  {
+    "file": "CLASE_2.pptx",
+    "href": "/nube/CLASE_2.pptx",
+    "sha256": "fa2fe4f67bb1d366879b35ddb3830e1027744459afb446b3129aa6e5abcb49aa",
+    "pages": [
+      {
+        "number": 1,
+        "paragraphs": [
+          "\"La tecnología se convierte en arte cuando desaparece. Cuando se vuelve tan intuitiva y fácil de usar que se convierte en una extensión natural de nosotros mismos\".",
+          "Por Steve Jobs",
+          "\"La tecnología es simplemente una herramienta, que en manos equivocadas puede ser perjudicial, pero en las manos correctas puede ser transformadora\"."
+        ],
+        "notes": [],
+        "images": [
+          "/nube/CLASE_2-image12.jpeg"
+        ]
+      },
+      {
+        "number": 2,
+        "paragraphs": [
+          "Evolución de las tecnologías"
+        ],
+        "notes": [],
+        "images": [
+          "/nube/CLASE_2-image13.jpeg"
+        ]
+      },
+      {
+        "number": 3,
+        "paragraphs": [
+          "13 | Sistemas Digitales.",
+          "1760",
+          "1840",
+          "1914",
+          "1990",
+          "80 años",
+          "74 años",
+          "55 años",
+          "2023",
+          "33 años"
+        ],
+        "notes": [],
+        "images": [
+          "/nube/CLASE_2-image14.png",
+          "/nube/CLASE_2-image15.png"
+        ]
+      },
+      {
+        "number": 4,
+        "paragraphs": [
+          "Velocidad de la Transformación Digital"
+        ],
+        "notes": [],
+        "images": [
+          "/nube/CLASE_2-image16.png",
+          "/nube/CLASE_2-image17.png"
+        ]
+      },
+      {
+        "number": 5,
+        "paragraphs": [],
+        "notes": [],
+        "images": [
+          "/nube/CLASE_2-image18.png"
+        ]
+      },
+      {
+        "number": 6,
+        "paragraphs": [
+          "Son desarrollos y tecnologías que aprovechan el poder de la digitalización y las tecnologías de la información para impulsar la cuarta revolución industrial. Estas tendencias se agrupan en tres grandes categorías: Físicas, Digitales y Biológicas, y están muy interrelacionadas entre sí.",
+          "¿Cuáles son las Megatendencias?",
+          "Según Klaus Schwab en su libro “La cuarta revolución industrial”, expresa que existen tres impulsores que cambiarán la industria en los próximos años."
+        ],
+        "notes": [],
+        "images": [
+          "/nube/CLASE_2-image19.png"
+        ]
+      },
+      {
+        "number": 7,
+        "paragraphs": [
+          "16 | Sistemas Digitales.",
+          "¿Cuál es el impulsor Físico?",
+          "Vehículos autónomos"
+        ],
+        "notes": [],
+        "images": [
+          "/nube/CLASE_2-image25.jpeg",
+          "/nube/CLASE_2-image20.jpeg",
+          "/nube/CLASE_2-image24.jpeg",
+          "/nube/CLASE_2-image23.jpeg",
+          "/nube/CLASE_2-image28.jpeg",
+          "/nube/CLASE_2-image22.png",
+          "/nube/CLASE_2-image27.jpeg",
+          "/nube/CLASE_2-image21.png",
+          "/nube/CLASE_2-image26.jpeg"
+        ]
+      },
+      {
+        "number": 8,
+        "paragraphs": [
+          "16 | Sistemas Digitales.",
+          "¿Cuál es el impulsor Físico?",
+          "Impresión 3D",
+          "Robótica avanzada"
+        ],
+        "notes": [],
+        "images": [
+          "/nube/CLASE_2-image34.jpeg",
+          "/nube/CLASE_2-image29.jpeg",
+          "/nube/CLASE_2-image33.jpeg",
+          "/nube/CLASE_2-image32.jpeg",
+          "/nube/CLASE_2-image37.jpeg",
+          "/nube/CLASE_2-image31.jpeg",
+          "/nube/CLASE_2-image36.jpeg",
+          "/nube/CLASE_2-image30.png",
+          "/nube/CLASE_2-image35.jpeg"
+        ]
+      },
+      {
+        "number": 9,
+        "paragraphs": [
+          "Cloud Computing: Servicios de computación a través de Internet. Usuarios consumen recursos y servicios sin requerir infraestructuras propias.",
+          "Internet de las cosas (IoT): Dispositivos físicos interconectados para monitorear y controlar activos y actividades.",
+          "Big Data: Refiere a grandes conjuntos de datos complejos que requieren herramientas especializadas para su procesamiento y análisis, revelando patrones y conocimientos relevantes sobre comportamientos y consumos de los usuarios.",
+          "Blockchain: Protocolo seguro que permite verifica transacciones sin autoridad central, utilizado en aplicaciones financieras como Bitcoin, certificados, títulos de propiedad y procesos médicos entre otros.",
+          "Realidad Aumentada: Combina elementos del mundo real con elementos virtuales para mejorar la percepción de la realidad.",
+          "Realidad Virtual: Simulación computarizada inmersiva que recrea un entorno tridimensional donde los usuarios pueden sumergirse y explorar.",
+          "Plataformas tecnológicas: Facilitan la conexión de personas, activos y datos, y crean nuevas formas de consumo de bienes y servicios. Ejemplos Uber, Spotify, Netflix, han transformado la forma en que las personas acceden a servicios.",
+          "¿Cuál es el impulsor Digital?"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 10,
+        "paragraphs": [
+          "¿Cuál es el impulsor Biológica?",
+          "Innovaciones en Genética:",
+          "Reducción del costo y facilidad de secuenciación genética ADN.Proyecto Genoma Humano tomó más de diez años y 2.700 millones de dólares.Hoy, un genoma se secuencia en pocas horas y por menos de 1.000 dólares.",
+          "Biología sintética:",
+          "Permite la personalización de organismos mediante la configuración del ADN.",
+          "Revolución en medicina personalizada:",
+          "Mejora en el tratamiento del cáncer al determinar la constitución genética de un tumor.",
+          "Medicina más precisa y terapias dirigidas.",
+          "Ingeniería genética:",
+          "Más precisa, eficaz y fácil de usar.",
+          "Limitaciones jurídicas, regulatorias y éticas.",
+          "Modificación de animales y creación de cultivos resistentes.",
+          "Diseño de animales para producir productos farmacéuticos y órganos de trasplante."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 11,
+        "paragraphs": [
+          "+",
+          "=",
+          "Industria 5.0",
+          "Colaboración entre la IA y humanos para mejorar la productividad y la eficiencia. ",
+          "IA y ML"
+        ],
+        "notes": [],
+        "images": [
+          "/nube/CLASE_2-image38.jpeg",
+          "/nube/CLASE_2-image41.png",
+          "/nube/CLASE_2-image40.jpeg",
+          "/nube/CLASE_2-image39.jpeg"
+        ]
+      },
+      {
+        "number": 12,
+        "paragraphs": [
+          "Capacidad de resolver problemas",
+          "1",
+          "Abordaje metodológico",
+          "2",
+          "Trabajo en equipo",
+          "3",
+          "Capacidad de aprender",
+          "4",
+          "Creatividad e innovación",
+          "7",
+          "Negociación",
+          "8",
+          "Pasión",
+          "9",
+          "Adaptabilidad",
+          "6",
+          "Inteligencia emocional",
+          "5",
+          "Cualidades y aptitudes requeridas en los profesionales de IT.",
+          "Resiliencia.",
+          "Sólido conocimiento técnico.",
+          "Pensamiento crítico, lógico y analítico.",
+          "Análisis de causas y efectos, ¿5 Porque´s?, Matriz de Eisenhower, 6M, 5S y otros.",
+          "Estrategia y táctica. OKR, PDCA y BPM.",
+          "Apertura y humildad.",
+          "Metodologías ágiles. Design Thinking, Scrum, Kanban y otros.",
+          "Desaprender y volver a aprender.",
+          "Diciplina y autogestión.",
+          "Relaciones interpersonales, empatía.",
+          "Escucha activa.",
+          "Comunicaciones asertivas.",
+          "Capacidad de adaptarse a los cambios.",
+          "Aprendizaje autodirigido.",
+          "Visualizar e imaginar soluciones diferentes.",
+          "Pensamiento lateral.",
+          "Preparación previa.",
+          "Identificación de intereses comunes.",
+          "Orientado a resultados.",
+          "\"Si te dedicas a aquello que te gusta y te apasiona, no es necesario contar con ningún plan maestro para alcanzar el éxito\" ",
+          "Mark Zuckerberg Cofundador / CEO de Facebook.",
+          "\"Stay hungry, stay foolish““Quédate con hambre, sigue alocado”. Sé insaciable, aventúrate. Haz lo que no se atreven a hacer los demás.Piensa fuera de la caja. Nunca te conformes. Sigue asombrándote como si fueras un niño…",
+          "\t\t\t\tSteve Jobs"
+        ],
+        "notes": [],
+        "images": []
+      }
+    ]
+  },
+  {
+    "file": "CLASE_3.pptx",
+    "href": "/nube/CLASE_3.pptx",
+    "sha256": "064edb93505222d395be12272c61811513d2c698273bffe53f01291e1b993d3c",
+    "pages": [
+      {
+        "number": 1,
+        "paragraphs": [
+          "Cloud Computing: Servicios de computación a través de Internet. Usuarios consumen recursos y servicios sin requerir infraestructuras propias.",
+          "Internet de las cosas (IoT): Dispositivos físicos interconectados para monitorear y controlar activos y actividades.",
+          "Big Data: Refiere a grandes conjuntos de datos complejos que requieren herramientas especializadas para su procesamiento y análisis, revelando patrones y conocimientos relevantes sobre comportamientos y consumos de los usuarios.",
+          "Blockchain: Protocolo seguro que permite verifica transacciones sin autoridad central, utilizado en aplicaciones financieras como Bitcoin, certificados, títulos de propiedad y procesos médicos entre otros.",
+          "Realidad Aumentada: Combina elementos del mundo real con elementos virtuales para mejorar la percepción de la realidad.",
+          "Realidad Virtual: Simulación computarizada inmersiva que recrea un entorno tridimensional donde los usuarios pueden sumergirse y explorar.",
+          "Plataformas tecnológicas: Facilitan la conexión de personas, activos y datos, y crean nuevas formas de consumo de bienes y servicios. Ejemplos Uber, Spotify, Netflix, han transformado la forma en que las personas acceden a servicios.",
+          "¿Cuál es el impulsor Digital?"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 2,
+        "paragraphs": [
+          "¿Cuál es el impulsor Biológica?",
+          "Innovaciones en Genética:",
+          "Reducción del costo y facilidad de secuenciación genética ADN.Proyecto Genoma Humano tomó más de diez años y 2.700 millones de dólares.Hoy, un genoma se secuencia en pocas horas y por menos de 1.000 dólares.",
+          "Biología sintética:",
+          "Permite la personalización de organismos mediante la configuración del ADN.",
+          "Revolución en medicina personalizada:",
+          "Mejora en el tratamiento del cáncer al determinar la constitución genética de un tumor.",
+          "Medicina más precisa y terapias dirigidas.",
+          "Ingeniería genética:",
+          "Más precisa, eficaz y fácil de usar.",
+          "Limitaciones jurídicas, regulatorias y éticas.",
+          "Modificación de animales y creación de cultivos resistentes.",
+          "Diseño de animales para producir productos farmacéuticos y órganos de trasplante."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 3,
+        "paragraphs": [
+          "+",
+          "=",
+          "Industria 5.0",
+          "Colaboración entre la IA y humanos para mejorar la productividad y la eficiencia. ",
+          "IA y ML"
+        ],
+        "notes": [],
+        "images": [
+          "/nube/CLASE_3-image12.jpeg",
+          "/nube/CLASE_3-image15.png",
+          "/nube/CLASE_3-image14.jpeg",
+          "/nube/CLASE_3-image13.jpeg"
+        ]
+      },
+      {
+        "number": 4,
+        "paragraphs": [
+          "Capacidad de resolver problemas",
+          "1",
+          "Abordaje metodológico",
+          "2",
+          "Trabajo en equipo",
+          "3",
+          "Capacidad de aprender",
+          "4",
+          "Creatividad e innovación",
+          "7",
+          "Negociación",
+          "8",
+          "Pasión",
+          "9",
+          "Adaptabilidad",
+          "6",
+          "Inteligencia emocional",
+          "5",
+          "Cualidades y aptitudes requeridas en los profesionales de IT.",
+          "Resiliencia.",
+          "Sólido conocimiento técnico.",
+          "Pensamiento crítico, lógico y analítico.",
+          "Análisis de causas y efectos, ¿5 Porque´s?, Matriz de Eisenhower, 6M, 5S y otros.",
+          "Estrategia y táctica. OKR, PDCA y BPM.",
+          "Apertura y humildad.",
+          "Metodologías ágiles. Design Thinking, Scrum, Kanban y otros.",
+          "Desaprender y volver a aprender.",
+          "Diciplina y autogestión.",
+          "Relaciones interpersonales, empatía.",
+          "Escucha activa.",
+          "Comunicaciones asertivas.",
+          "Capacidad de adaptarse a los cambios.",
+          "Aprendizaje autodirigido.",
+          "Visualizar e imaginar soluciones diferentes.",
+          "Pensamiento lateral.",
+          "Preparación previa.",
+          "Identificación de intereses comunes.",
+          "Orientado a resultados.",
+          "\"Si te dedicas a aquello que te gusta y te apasiona, no es necesario contar con ningún plan maestro para alcanzar el éxito\" ",
+          "Mark Zuckerberg Cofundador / CEO de Facebook.",
+          "\"Stay hungry, stay foolish““Quédate con hambre, sigue alocado”. Sé insaciable, aventúrate. Haz lo que no se atreven a hacer los demás.Piensa fuera de la caja. Nunca te conformes. Sigue asombrándote como si fueras un niño…",
+          "\t\t\t\tSteve Jobs"
+        ],
+        "notes": [],
+        "images": []
+      }
+    ]
+  },
+  {
+    "file": "CLASE_4.pptx",
+    "href": "/nube/CLASE_4.pptx",
+    "sha256": "fea17329828bc18e35f1f49daf8112f043d347076cd12ecb13996fe8f954968a",
+    "pages": [
+      {
+        "number": 1,
+        "paragraphs": [
+          "Data Domain / Stogare Cofre:",
+          "\tStorage destinado al almacenamiento de Backups de Datos y BD entre otros. Uso de Deduplicación, Protección de datos y encripción de los respaldos almacenados.",
+          "Storage Tape o Autoloaders:\tDispositivos de grabación y lectura de cintas magnéticas utilizadas hace ya varios años para respaldar los BK fuera del DataCenter e incluso del edificio. Las tecnologías de \tCintas más utilizadas son, LTO (Linear Tape-Open), DLT (Digital Linear Tape), DAT (Digital Audio Tape), entre otros.",
+          "Cloud Object Storage:",
+          "Almacenamiento basado en el modelo de almacenamiento de objetos, donde los datos se guardan como objetos individuales con una identificación única.",
+          "Amazon S3 (Simple Storage Service), Google Cloud Storage, Huawei OBS (Object Storage Service) entre otros.",
+          "Cloud Block Storage:",
+          "Almacenamiento basado en bloques que permite a los usuarios crear y administrar volúmenes de almacenamiento que se pueden adjuntar a instancias de computación.",
+          "Amazon EBS (Elastic Block Store), Google Cloud Persistent Disk, Huawei EVS (Elastic Volume Service)",
+          "Cloud File Storage:",
+          "Almacenamiento de archivos compartido basado en sistemas de archivos tradicionales que permite a múltiples instancias acceder y modificar archivos en una ubicación centralizada.",
+          "Amazon EFS (Elastic File System), Google Cloud Filestore, Huawei NAS (Network Attached Storage)",
+          "Cloud Archive o Cold Storage:",
+          "Almacenamiento de larga duración y bajo costo diseñado para datos que se acceden con poca frecuencia y se mantienen principalmente para fines de cumplimiento normativo o de respaldo.",
+          "Amazon Glacier o Deep Archive, Google Cloud Archive Storage, Huawei OBS (Object Storage Service) con opción de almacenamiento de archivos a largo plazo",
+          "Cloud Database Storage:",
+          "Almacenamiento específico para bases de datos, optimizado para la gestión y el rendimiento de los sistemas de bases de datos en la nube.",
+          "Amazon RDS (Relational Database Service), Google Cloud Spanner, Cloud SQL, Huawei GaussDB (Distributed Database Service)",
+          "Capa física: Almacenamiento",
+          "Storage de proposito general y específico",
+          "Cloud Storage",
+          "HDD",
+          "SSD",
+          "DDCofre",
+          "HDD + SSD Híbridos",
+          "Cloud Object Storage",
+          "Cloud Block Storage",
+          "Cloud File Storage",
+          "Cloud Archive Storage",
+          "Cloud DataBase Storage",
+          "Cintas Tape",
+          "General Purpose",
+          "Backups"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 2,
+        "paragraphs": [
+          "Capa física.",
+          "Procesadores  Propósito General",
+          "Procesadores Móviles",
+          "Intel Core",
+          "AMD Ryzen",
+          "Apple A-series",
+          "Procesadores Gráficos",
+          "NVIDIA GeForce",
+          "AMD Radeon",
+          "ARM Cortex",
+          "AMD EPYC",
+          "ARM Cortex - A",
+          "Samsung Exynos",
+          "Intel Iris Xe",
+          "Procesamiento",
+          "Procesadores Servidores",
+          "Intel Xeon",
+          "ARM Based",
+          "AMD EPYC",
+          "Procesadores de propósito general:",
+          "Microprocesadores diseñados para realizar una amplia gama de tareas y son adecuados para aplicaciones generales de cómputo.",
+          "Procesadores de la serie Intel Core, procesadores AMD Ryzen, procesadores ARM Cortex-A, entre otros. Los vamos a encontrar en PC y Notebooks. ",
+          "Procesadores de servidores:",
+          "Microprocesadores optimizados para ejecutar aplicaciones en servidores y manejar cargas de trabajo empresariales y de alta demanda. Se consideran factores como el rendimiento, la eficiencia energética, la escalabilidad, la capacidad de administración y la compatibilidad con software y aplicaciones específicas.",
+          "Procesadores Intel Xeon, procesadores AMD EPYC, procesadores IBM Power, entre otros.",
+          "Procesadores móviles:",
+          "Microprocesadores diseñados para dispositivos móviles, como teléfonos inteligentes y tabletas, con énfasis en la eficiencia energética y el rendimiento móvil.",
+          "Procesadores ARM Cortex-A (utilizados en chips Snapdragon de Qualcomm), procesadores Apple A-series (utilizados en iPhones y iPads), procesadores Samsung Exynos, entre otros.",
+          "Procesadores de gráficos:",
+          "Microprocesadores especializados en el procesamiento y renderizado de gráficos en aplicaciones que requieren un alto rendimiento visual.",
+          "Unidades de procesamiento de gráficos (GPU) de NVIDIA GeForce, AMD Radeon, procesadores gráficos integrados Intel (como la serie Intel Iris Xe)."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 3,
+        "paragraphs": [
+          "Procesadores de alto rendimiento y supercomputadoras:",
+          "Microprocesadores diseñados para aplicaciones que requieren una capacidad de procesamiento intensiva y computación de alto rendimiento.",
+          "Procesadores IBM Power (utilizados en supercomputadoras como IBM Summit), aceleradores como los NVIDIA Tesla y AMD Radeon Instinct, procesadores Intel Xeon Phi.",
+          "Procesadores especializados en inteligencia artificial (IA) y aprendizaje automático (ML):",
+          "Microprocesadores están optimizados para tareas de IA y ML, como el procesamiento de redes neuronales y algoritmos de aprendizaje profundo.",
+          "Unidades de procesamiento de tensor (TPU) de Google, procesadores NVIDIA Tensor Core, procesadores Huawei Ascend, entre otros.",
+          "Procesadores ",
+          "Alto Rendimiento",
+          "IBM Power",
+          "NVIDIA Tesla",
+          "AMD ",
+          "Radeon Instinct",
+          "Procesadores ",
+          "Esp. IA y ML",
+          "Tensor (TPU)",
+          "NVIDIA Tensor Core",
+          "Huawei Ascend",
+          "Intel Xeon Phi",
+          "AWS Inferentia",
+          "Capa física: Procesamiento"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 4,
+        "paragraphs": [
+          "Interfaz de usuario (UI).Es la forma en que los usuarios interactúan con un sistema, como un software, una aplicación móvil o un sitio web. Puede incluir elementos visuales, como botones, menús desplegables, campos de entrada de texto, etc.",
+          "Interfaz de usuario basada en voz (VUI).Permite a los usuarios interactuar con un sistema utilizando comandos de voz en lugar de utilizar una interfaz gráfica tradicional. Los asistentes virtuales, como Siri, Google Assistant y Alexa, utilizan este tipo de interfaz.",
+          "Interfaz de línea de comandos (CLI).Es una interfaz que permite a los usuarios interactuar con un sistema ingresando comandos de texto. Los sistemas operativos Unix/Linux y la mayoría de las aplicaciones de programación tienen interfaces de línea de comandos.",
+          "Interfaz de programación de aplicaciones (API).Es un conjunto de reglas y protocolos que permite la comunicación entre diferentes aplicaciones de software. Las API permiten a los desarrolladores utilizar funcionalidades y datos de otras aplicaciones o servicios.",
+          "Interfaz de red (NIC): Es el dispositivo o tarjeta de red que permite la conexión de una computadora o dispositivo a una red. Proporciona una interfaz física y a menudo incluye puertos Ethernet, Wi-Fi, Bluetooth, etc.",
+          "Capa física: Interfaces.",
+          "UI                 |             VUI              |              API              |              CLI             |         NIC     ",
+          "Interfaces"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 5,
+        "paragraphs": [
+          "Sistemas operativos (SO).Los SO ofrecen mayor seguridad, rendimiento y capacidad de respuesta. Windows 11, macOS Monterey, Linux (con diversas distribuciones) y S.O. móviles como Android y iOS.",
+          "Virtualización",
+          " Permite la creación de entornos virtuales aislados en un mismo hardware físico. Tecnologías como VMware, Hyper-V, RHEV y KVM se utilizan ampliamente en la virtualización.",
+          "Contenedores",
+          "Una forma de empaquetar y distribuir aplicaciones junto con sus dependencias, facilitando su implementación y ejecución en diferentes entornos. Kubernetes, Dockers, OpenShift.",
+          "AplicacionesAplicaciones Móviles, Web, de Escritorio, de Realidad virtual, de Redes sociales, de streaming, comercio electrónico y otros.",
+          "Inteligencia ArtificialLos algoritmos, macros y técnicas de aprendizaje automático como TensorFlow, PyTorch y scikit-learn, permiten la creación de modelos de aprendizaje automático sofisticados para tareas como reconocimiento de voz, procesamiento de imágenes, traducción automática y recomendación de contenido.",
+          "Capa de software y Aplicación.",
+          "Web Apps",
+          "Movile Apps",
+          "Realidad virtual",
+          "Contenerización",
+          "Inteligencia Artificial",
+          "SoftwareAplicaciones"
+        ],
+        "notes": [],
+        "images": [
+          "/nube/CLASE_4-image17.png",
+          "/nube/CLASE_4-image12.png",
+          "/nube/CLASE_4-image16.png",
+          "/nube/CLASE_4-image15.png",
+          "/nube/CLASE_4-image14.png",
+          "/nube/CLASE_4-image13.png"
+        ]
+      },
+      {
+        "number": 6,
+        "paragraphs": [
+          "Datos:La capa de Datos se refiere a la capa de un sistema o aplicación donde se almacenan, gestionan y manipulan los datos. Esta capa se encarga de administrar la persistencia de los datos, su estructura, integridad y acceso eficiente.",
+          "Bases de datos: Son sistemas diseñados para almacenar grandes volúmenes de datos estructurados y permiten realizar operaciones como búsqueda, inserción, actualización y eliminación de datos. Algunos ejemplos de bases de datos populares son MySQL, Oracle, SQL Server, MongoDB, entre otros.",
+          "Sistemas de gestión de bases de datos (SGBD).Son programas que permiten administrar y controlar las bases de datos. Estos sistemas proporcionan herramientas y funcionalidades para definir la estructura de los datos, garantizar la integridad, implementar la seguridad y realizar consultas y análisis de datos.",
+          "Modelado y diseño de datos.Implica la creación de estructuras y esquemas de datos adecuados para una aplicación o sistema. Esto puede incluir el diseño de tablas, relaciones entre entidades, definición de atributos y restricciones de integridad.",
+          "UsuariosLa capa de Usuarios se refiere a la interfaz o punto de interacción entre los usuarios finales y el sistema o aplicación. Esta capa se encarga de presentar la información y funcionalidades de manera accesible y fácil de usar para los usuarios. Algunos de los componentes o elementos asociados a esta capa son:",
+          "Interfaz de usuario (UI).Es la parte visible y tangible con la que los usuarios interactúan. Puede incluir elementos gráficos, botones, menús, formularios, etc., que permiten a los usuarios interactuar con el sistema de manera intuitiva.",
+          "Experiencia de usuario (UX).",
+          "Se refiere a la forma en que los usuarios perciben y experimentan la interfaz y la interacción con el sistema. La UX se enfoca en aspectos como la usabilidad, la accesibilidad, el diseño visual, la respuesta del sistema, entre otros, para proporcionar una experiencia positiva al usuario.",
+          "Personalización.Algunas aplicaciones permiten a los usuarios personalizar la interfaz y las configuraciones según sus preferencias individuales, como temas, atajos de teclado, idioma, etc.",
+          "Seguridad y autenticación.Esta capa también se ocupa de garantizar la seguridad de los usuarios, incluyendo mecanismos de autenticación, protección de datos personales, control de acceso, entre otros.",
+          "Capa de datos y usuarios."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 7,
+        "paragraphs": [
+          "Seguridad física.:",
+          "Control de Acceso Restringido (Código de acceso, Biometría y otros), Cámaras de Seguridad, Guardia privada y otros.",
+          "Seguridad de Capa de Red.",
+          "Firewalls:",
+          "Los firewalls se utilizan para controlar el tráfico de red y filtrar paquetes en función de reglas predefinidas. Pueden ser implementados en forma de hardware o software y actúan como una barrera entre redes confiables y no confiables, examinando y bloqueando el tráfico no autorizado.",
+          "Redes privadas virtuales (VPN):",
+          "Las VPN permiten establecer conexiones seguras y encriptadas sobre redes públicas, como Internet. Utilizan protocolos de tunelización y cifrado para proteger la confidencialidad e integridad de los datos transmitidos a través de la red.",
+          "Seguridad de protocolos:",
+          "Los protocolos de red, como IP (Internet Protocol), TCP (Transmission Control Protocol) y UDP (User Datagram Protocol), pueden presentar vulnerabilidades. Implementar medidas de seguridad en los protocolos utilizados, como IPsec (IP Security) para cifrar y autenticar el tráfico IP, puede proteger la comunicación en la capa de red.",
+          "VLAN (Virtual LAN) y segmentación de red:",
+          "La segmentación de red y la configuración de VLAN pueden ayudar a mejorar la seguridad al separar físicamente o lógicamente los dispositivos en grupos y restringir el acceso entre ellos.",
+          "Esto ayuda a limitar la propagación de amenazas en la red y proporciona un control más granular sobre el tráfico de red.",
+          "Prevención de ataques de denegación de servicio (DoS):",
+          "Los ataques de DoS buscan abrumar los recursos de red o sistemas, impidiendo el acceso legítimo a los servicios.La implementación de soluciones de prevención de DoS, como filtros de tráfico, equilibrio de carga y sistemas de detección de anomalías, puede ayudar a mitigar estos ataques.",
+          "Sistemas de detección y prevención de intrusos (IDS/IPS):",
+          "Los IDS monitorean el tráfico de red en busca de actividades sospechosas o maliciosas y generan alertas en tiempo real. Los IPS van un paso más allá y pueden bloquear o tomar medidas correctivas automáticamente para detener los ataques.",
+          "Monitoreo y registro de eventos:",
+          "El monitoreo y registro de eventos en la red permiten identificar actividades anómalas, rastrear incidentes de seguridad y llevar a cabo análisis forenses en caso de intrusiones.",
+          "Herramientas como los sistemas de gestión de eventos e información de seguridad (SIEM) pueden ayudar a centralizar y analizar los registros.",
+          "Capa de Seguridad y Cumplimiento:"
+        ],
+        "notes": [],
+        "images": []
+      }
+    ]
+  },
+  {
+    "file": "CLASE_5.pptx",
+    "href": "/nube/CLASE_5.pptx",
+    "sha256": "ba7ded6aa1f56b21870a3a3cbf6c061197d77f15035b01b83c3ea848f44a8fca",
+    "pages": [
+      {
+        "number": 1,
+        "paragraphs": [
+          "   Transformación Digital"
+        ],
+        "notes": [],
+        "images": [
+          "/nube/CLASE_5-image12.jpeg"
+        ]
+      },
+      {
+        "number": 2,
+        "paragraphs": [
+          "Seguridad física.:",
+          "Control de Acceso Restringido (Código de acceso, Biometría y otros), Cámaras de Seguridad, Guardia privada y otros.",
+          "Seguridad de Capa de Red.",
+          "Firewalls:",
+          "Los firewalls se utilizan para controlar el tráfico de red y filtrar paquetes en función de reglas predefinidas. Pueden ser implementados en forma de hardware o software y actúan como una barrera entre redes confiables y no confiables, examinando y bloqueando el tráfico no autorizado.",
+          "Redes privadas virtuales (VPN):",
+          "Las VPN permiten establecer conexiones seguras y encriptadas sobre redes públicas, como Internet. Utilizan protocolos de tunelización y cifrado para proteger la confidencialidad e integridad de los datos transmitidos a través de la red.",
+          "Seguridad de protocolos:",
+          "Los protocolos de red, como IP (Internet Protocol), TCP (Transmission Control Protocol) y UDP (User Datagram Protocol), pueden presentar vulnerabilidades. Implementar medidas de seguridad en los protocolos utilizados, como IPsec (IP Security) para cifrar y autenticar el tráfico IP, puede proteger la comunicación en la capa de red.",
+          "VLAN (Virtual LAN) y segmentación de red:",
+          "La segmentación de red y la configuración de VLAN pueden ayudar a mejorar la seguridad al separar físicamente o lógicamente los dispositivos en grupos y restringir el acceso entre ellos.",
+          "Esto ayuda a limitar la propagación de amenazas en la red y proporciona un control más granular sobre el tráfico de red.",
+          "Prevención de ataques de denegación de servicio (DoS):",
+          "Los ataques de DoS buscan abrumar los recursos de red o sistemas, impidiendo el acceso legítimo a los servicios.La implementación de soluciones de prevención de DoS, como filtros de tráfico, equilibrio de carga y sistemas de detección de anomalías, puede ayudar a mitigar estos ataques.",
+          "Sistemas de detección y prevención de intrusos (IDS/IPS):",
+          "Los IDS monitorean el tráfico de red en busca de actividades sospechosas o maliciosas y generan alertas en tiempo real. Los IPS van un paso más allá y pueden bloquear o tomar medidas correctivas automáticamente para detener los ataques.",
+          "Monitoreo y registro de eventos:",
+          "El monitoreo y registro de eventos en la red permiten identificar actividades anómalas, rastrear incidentes de seguridad y llevar a cabo análisis forenses en caso de intrusiones.",
+          "Herramientas como los sistemas de gestión de eventos e información de seguridad (SIEM) pueden ayudar a centralizar y analizar los registros.",
+          "Capa de Seguridad y Cumplimiento:"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 3,
+        "paragraphs": [
+          "Transición al Cloud computing. Principales servicios.",
+          "On Premise",
+          "PaaS",
+          "IaaS",
+          "SaaS",
+          "Beneficios del Cloud Computing: Escalabilidad y elasticidad, alta disponibilidad, pago por uso, TTM entre otros."
+        ],
+        "notes": [],
+        "images": [
+          "/nube/CLASE_5-image13.png"
+        ]
+      },
+      {
+        "number": 4,
+        "paragraphs": [
+          "Ejemplo infraestructura mixta | Cloud – On premise"
+        ],
+        "notes": [],
+        "images": [
+          "/nube/CLASE_5-image14.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "file": "clase_6_arquitecturas.pptx",
+    "href": "/nube/clase_6_arquitecturas.pptx",
+    "sha256": "c0d39a95dc3a06266560f4a95e1277629d9067978db8aedac838a0fb38f2b216",
+    "pages": [
+      {
+        "number": 1,
+        "paragraphs": [],
+        "notes": [],
+        "images": [
+          "/nube/clase_6_arquitecturas-image2.jpg"
+        ]
+      },
+      {
+        "number": 2,
+        "paragraphs": [
+          "Arquitecturas",
+          "En la actualidad, el uso de la nube está transformando el diseño y la seguridad  de  las  aplicaciones.  En  lugar  de  grandes  aplicaciones monolíticas,   se   están   utilizando   servicios   más   pequeños   y descentralizados.  Estos  servicios  se  comunican  a  través  de APIs  o mediante la mensajería asincrónica. Además, las aplicaciones escalan horizontalmente, agregando nuevas instancias según la demanda."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 3,
+        "paragraphs": [
+          "Arquitecturas",
+          "Estos cambios presentan desafíos significativos. Los estados de las aplicaciones  se  distribuyen,  las  operaciones  se  realizan  de  manera paralela y asincrónica, y es crucial que las aplicaciones sean resilientes frente a fallos. Además, los actores maliciosos están constantemente enfocados  en  atacar  las  aplicaciones.  Por  otro  lado,  es  necesario automatizar  y  predecir  los  despliegues  de  las  aplicaciones,  y  el monitoreo  y  la  telemetría  son  esenciales  para  obtener  información valiosa sobre el sistema."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 4,
+        "paragraphs": [
+          "Arquitecturas",
+          "Modern cloud",
+          "Traditional on-premises",
+          "Monolithic",
+          "Designed for predictable scalability Relational database",
+          "Synchronized processing Design to avoid failures (MTBF) Occasional large updates Manual management Snowflake servers",
+          "Decomposed",
+          "Designed for elastic scale",
+          "Polyglot persistence (mix of storage technologies)",
+          "Asynchronous processing Design for failure (MTTR) Frequent small updates Automated self-management Immutable infrastructure"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 5,
+        "paragraphs": [
+          "Arquitecturas"
+        ],
+        "notes": [],
+        "images": [
+          "/nube/clase_6_arquitecturas-image3.jpg",
+          "/nube/clase_6_arquitecturas-image1.png"
+        ]
+      },
+      {
+        "number": 6,
+        "paragraphs": [
+          "Arquitectura N-tier",
+          "N-tier es una arquitectura tradicional para aplicaciones empresariales. Las dependencias se gestionan dividiendo la aplicación en capas que realizan funciones lógicas, como presentación, lógica de negocio y acceso a datos. Una capa solo puede llamar a las capas que se encuentran por debajo de ella. Sin embargo, este enfoque de capas horizontales puede ser una limitación. Puede resultar difícil introducir cambios en una parte de la aplicación sin afectar al resto de la misma. Esto dificulta las actualizaciones frecuentes y limita la rapidez con la que se pueden agregar nuevas características."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 7,
+        "paragraphs": [
+          "Arquitectura N-tier",
+          "La arquitectura N-tier es adecuada para migrar aplicaciones existentes que ya utilizan una arquitectura en capas. Por esta razón, se encuentra más comúnmente en soluciones de infraestructura como servicio (IaaS) o aplicaciones que utilizan una combinación de IaaS y servicios gestionados."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 8,
+        "paragraphs": [],
+        "notes": [],
+        "images": [
+          "/nube/clase_6_arquitecturas-image5.png",
+          "/nube/clase_6_arquitecturas-image4.jpg"
+        ]
+      },
+      {
+        "number": 9,
+        "paragraphs": [
+          "Arquitectura Web-Queue-Worker",
+          "Una arquitectura Web-Queue-Worker aplica para una solución puramente PaaS. En este estilo, la aplicación tiene un front-end web que maneja las solicitudes HTTP y un trabajador de back-end que realiza tareas intensivas en CPU o operaciones de larga duración. El front-end se comunica con el trabajador a través de una cola de mensajes asincrónica."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 10,
+        "paragraphs": [
+          "Arquitectura Web-Queue-Worker",
+          "La arquitectura Web-Queue-Worker es adecuada para dominios relativamente simples con algunas tareas intensivas en recursos. Al igual que en la arquitectura N-tier, es fácil de entender. El uso de servicios gestionados simplifica el despliegue y las operaciones. Sin embargo, en dominios complejos, puede resultar difícil gestionar las dependencias. El front-end y el trabajador pueden convertirse fácilmente en componentes grandes y monolíticos que son difíciles de mantener y actualizar. Al igual que con N-tier, esto puede reducir la frecuencia de las actualizaciones y limitar la innovación."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 11,
+        "paragraphs": [
+          "Web-Queue-Worker"
+        ],
+        "notes": [],
+        "images": [
+          "/nube/clase_6_arquitecturas-image7.png",
+          "/nube/clase_6_arquitecturas-image6.jpg"
+        ]
+      },
+      {
+        "number": 12,
+        "paragraphs": [
+          "Arquitectura Microservicios",
+          "Si tu aplicación tiene un dominio más complejo, considera migrar a una arquitectura de microservicios. Una aplicación de microservicios está compuesta por muchos servicios pequeños e independientes. Cada servicio implementa una sola capacidad de negocio. Los servicios están acoplados de forma flexible, comunicándose a través de contratos de API."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 13,
+        "paragraphs": [
+          "Arquitectura Microservicios",
+          "Cada servicio puede ser desarrollado por un equipo de desarrollo pequeño y enfocado. Los servicios individuales pueden ser desplegados sin mucha coordinación entre los equipos, lo que fomenta actualizaciones frecuentes. Una arquitectura de microservicios es más compleja de construir y gestionar que las arquitecturas N-tier o",
+          "web-queue-worker. Requiere una cultura de desarrollo y DevOps madura. Pero si se hace correctamente, este estilo puede llevar a una mayor velocidad de lanzamiento, una innovación más rápida y una arquitectura más resiliente."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 14,
+        "paragraphs": [],
+        "notes": [],
+        "images": [
+          "/nube/clase_6_arquitecturas-image9.png",
+          "/nube/clase_6_arquitecturas-image8.jpg"
+        ]
+      },
+      {
+        "number": 15,
+        "paragraphs": [
+          "Arquitecturas Event-Driven Architectures",
+          "Las arquitecturas orientadas a eventos utilizan un modelo de publicación-suscripción (pub-sub), donde los productores publican eventos y los consumidores se suscriben a ellos. Los productores son independientes de los consumidores, y los consumidores son independientes entre sí."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 16,
+        "paragraphs": [
+          "Arquitecturas Event-Driven Architectures",
+          "Considera una arquitectura orientada a eventos para aplicaciones que reciben y procesan grandes volúmenes de datos con una latencia muy baja, como las soluciones de IoT. Este estilo también es útil cuando diferentes subsistemas deben realizar diferentes tipos de procesamiento en los mismos datos de eventos."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 17,
+        "paragraphs": [],
+        "notes": [],
+        "images": [
+          "/nube/clase_6_arquitecturas-image11.png",
+          "/nube/clase_6_arquitecturas-image10.jpg"
+        ]
+      },
+      {
+        "number": 18,
+        "paragraphs": [
+          "Arquitecturas Big Data & Big Compute",
+          "Big Data y Big Compute son estilos de arquitectura especializados para cargas de trabajo que se ajustan a perfiles específicos. Big Data divide un conjunto de datos muy grande en fragmentos, realizando un procesamiento paralelo en todo el conjunto para análisis e informes. Big Compute, también conocido como cómputo de alto rendimiento (HPC), realiza cálculos paralelos en un gran número (miles) de núcleos. Los dominios incluyen simulaciones, modelado y renderizado 3D."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 19,
+        "paragraphs": [
+          "Big Data, Big Compute"
+        ],
+        "notes": [],
+        "images": [
+          "/nube/clase_6_arquitecturas-image13.png",
+          "/nube/clase_6_arquitecturas-image12.jpg"
+        ]
+      },
+      {
+        "number": 20,
+        "paragraphs": [
+          "Estilos de arquitectura como restricciones",
+          "Un estilo de arquitectura impone restricciones en el diseño, incluyendo el conjunto de elementos que pueden aparecer y las relaciones permitidas entre esos elementos. Las restricciones guían la \"forma\" de una arquitectura al restringir el universo de opciones. Cuando una arquitectura se ajusta a las restricciones de un estilo particular, surgen ciertas propiedades deseables."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 21,
+        "paragraphs": [
+          "Estilos de arquitectura como restricciones",
+          "Por ejemplo, las restricciones en microservicios incluyen:",
+          "Un servicio representa una sola responsabilidad.",
+          "Cada servicio es independiente de los demás.",
+          "Los datos son privados para el servicio que los posee. Los servicios no comparten datos.",
+          "Al adherirse a estas restricciones, lo que emerge es un sistema en el que los servicios pueden ser desplegados de manera independiente, las fallas están aisladas, las actualizaciones frecuentes son posibles y es fácil introducir nuevas tecnologías en la aplicación."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 22,
+        "paragraphs": [
+          "Estilos de arquitectura como restricciones",
+          "Antes de elegir un estilo de arquitectura, asegúrate de comprender los principios y restricciones subyacentes de ese estilo. De lo contrario, puedes terminar con un diseño que cumpla con el estilo a un nivel superficial, pero que no alcance todo el potencial de ese estilo. También es importante ser pragmático. A veces es mejor relajar una restricción en lugar de insistir en la pureza arquitectónica.",
+          "La siguiente tabla resume cómo cada estilo gestiona las dependencias y los tipos de dominio que son más adecuados para cada uno."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 23,
+        "paragraphs": [
+          "Architecture style",
+          "Dependency management",
+          "Oomain type",
+          "N-tier",
+          "Horizontal tiers divided by subnet",
+          "Traditional business domain. Frequency of updates is low.",
+          "Web-ctueue-w orker",
+          "Front and backend jobs, decoupled by async messaging.",
+          "Relatively simple domain with some resource intensive tasks.",
+          "Microservices",
+          "Vertically (functionally) decomposed services that call each other through APIs.",
+          "Complicated domain. Frequent updates.",
+          "Event-driven architecture",
+          "Producer/consumer. Independent view per sub-system.",
+          "IoT and real-time systems.",
+          "Big data",
+          "Divide a huge dataset into small chunks. Parallel processing on local datasets.",
+          "Batch and real-time data analysis. Predictive analysis using ML.",
+          "Big compute",
+          "Data allocation to thousands of cores.",
+          "Compute intensive domains such as simulation."
+        ],
+        "notes": [],
+        "images": [
+          "/nube/clase_6_arquitecturas-image14.jpg"
+        ]
+      },
+      {
+        "number": 24,
+        "paragraphs": [
+          "Desafíos y beneficios a considerar",
+          "Las restricciones de los estilos de arquitectura también plantean desafíos, por lo que es importante entender los compromisos al adoptar cualquiera de estos estilos. ¿Los beneficios del estilo de arquitectura superan los desafíos para este subdominio y contexto acotado? Aquí hay algunos tipos de desafíos a considerar al seleccionar un estilo de arquitectura:"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 25,
+        "paragraphs": [
+          "Complejidad:",
+          "¿Está justificada la complejidad de la arquitectura para su dominio? Por otro lado, ¿es el estilo demasiado simplista para su dominio? En ese caso, corre el riesgo de terminar con una \"bola de barro\" porque la arquitectura no le ayuda a gestionar las dependencias de manera limpia."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 26,
+        "paragraphs": [
+          "Mensajería asíncrona y consistencia eventual:",
+          "La mensajería asíncrona se puede utilizar para desacoplar los servicios y aumentar la confiabilidad (porque los mensajes se pueden volver a intentar) y la escalabilidad. Sin embargo, esto también plantea desafíos en el manejo de la consistencia eventual, así como la posibilidad de mensajes duplicados."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 27,
+        "paragraphs": [
+          "Comunicación entre servicios:",
+          "Al descomponer una aplicación en servicios separados, existe el riesgo de que la comunicación entre servicios genere una latencia inaceptable o cree congestión en la red (por ejemplo, en una arquitectura de microservicios)."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 28,
+        "paragraphs": [
+          "Gestionabilidad:",
+          "¿Qué tan difícil es administrar la aplicación, monitorearla, implementar actualizaciones, y así sucesivamente?"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 29,
+        "paragraphs": [
+          "Nota:",
+          "Es importante considerar estos desafíos y considerarlos frente a los beneficios al seleccionar un estilo de arquitectura. Cada estilo tiene sus ventajas y desventajas, y es necesario evaluar cómo se ajusta a las necesidades y requisitos específicos de su dominio y contexto."
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 30,
+        "paragraphs": [
+          "Bonus 1:"
+        ],
+        "notes": [],
+        "images": [
+          "/nube/clase_6_arquitecturas-image15.jpg"
+        ]
+      },
+      {
+        "number": 31,
+        "paragraphs": [
+          "Bonus 1:"
+        ],
+        "notes": [],
+        "images": [
+          "/nube/clase_6_arquitecturas-image16.jpg"
+        ]
+      },
+      {
+        "number": 32,
+        "paragraphs": [
+          "Bonus 3:"
+        ],
+        "notes": [],
+        "images": [
+          "/nube/clase_6_arquitecturas-image17.jpg"
+        ]
+      },
+      {
+        "number": 33,
+        "paragraphs": [
+          "Consideraciones:"
+        ],
+        "notes": [],
+        "images": [
+          "/nube/clase_6_arquitecturas-image18.jpg"
+        ]
+      },
+      {
+        "number": 34,
+        "paragraphs": [
+          "Netflix:"
+        ],
+        "notes": [],
+        "images": [
+          "/nube/clase_6_arquitecturas-image19.jpg"
+        ]
+      },
+      {
+        "number": 35,
+        "paragraphs": [
+          "Muchas gracias"
+        ],
+        "notes": [],
+        "images": [
+          "/nube/clase_6_arquitecturas-image20.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "file": "clase_7.pptx",
+    "href": "/nube/clase_7.pptx",
+    "sha256": "90d17717c2886fc488be00fe924822e8d52e7005a428707817b5abf2aef764c7",
+    "pages": [
+      {
+        "number": 1,
+        "paragraphs": [
+          "Seguridad en la Nube",
+          "Principios · Herramientas · Mejores prácticas",
+          "Cloud Computing y Desarrollo de Software · Clase de 2 horas"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 2,
+        "paragraphs": [
+          "¿Qué vamos a aprender hoy?",
+          "Comprender",
+          "Responsabilidad compartida y principios de seguridad.",
+          "Aplicar",
+          "Mínimo privilegio, MFA, cifrado y segmentación.",
+          "Relacionar",
+          "Riesgo → control → herramienta cloud.",
+          "Diseñar",
+          "Una arquitectura básica con seguridad desde el inicio.",
+          "2"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 3,
+        "paragraphs": [
+          "Pregunta disparadora",
+          "Una aplicación está desplegada en la nube. ¿Quién es responsable de su seguridad?",
+          "USUARIO",
+          "INTERNET",
+          "APP",
+          "BASE DE DATOS",
+          "Idea clave: estar en la nube ≠ delegar toda la seguridad",
+          "3"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 4,
+        "paragraphs": [
+          "Modelo de responsabilidad compartida",
+          "A medida que pasamos de On-Premise a SaaS, cambia quién administra cada capa.",
+          "ON-PREMISE",
+          "Cliente administra todo",
+          "Datos",
+          "Aplicación",
+          "SO/Runtime",
+          "Infraestructura",
+          "IaaS",
+          "Proveedor: infraestructura físicaCliente: SO, apps, datos y configuración",
+          "Datos",
+          "Aplicación",
+          "SO/Runtime",
+          "Infraestructura",
+          "PaaS",
+          "Proveedor: infraestructura + plataformaCliente: app, datos, identidades y configuración",
+          "Datos",
+          "Aplicación",
+          "SO/Runtime",
+          "Infraestructura",
+          "SaaS",
+          "Proveedor administra gran parte del stackCliente conserva datos, accesos y configuración",
+          "Datos",
+          "Aplicación",
+          "SO/Runtime",
+          "Infraestructura",
+          "4"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 5,
+        "paragraphs": [
+          "Principios fundamentales: triada CIA",
+          "C · Confidencialidad",
+          "Solo accede quien corresponde.IAM · cifrado · secretos",
+          "I · Integridad",
+          "Los datos no se alteran sin autorización.Permisos · hashes · logs",
+          "A · Disponibilidad",
+          "El servicio está disponible cuando se necesita.Redundancia · backup · DR",
+          "Ejemplo: una base cifrada pero sin backup protege confidencialidad, pero pone en riesgo disponibilidad.",
+          "5"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 6,
+        "paragraphs": [
+          "Identidad y acceso: el nuevo perímetro",
+          "• Mínimo privilegio: solo los permisos necesarios.",
+          "• MFA: reducir el riesgo de una contraseña comprometida.",
+          "• RBAC: permisos asociados a roles, no a personas individualmente.",
+          "• Zero Trust: verificar explícitamente cada acceso.",
+          "Ejemplo inseguro",
+          "Aplicación → usuario de BD con rol ADMIN",
+          "Mejora",
+          "Aplicación → identidad propia → permisos SELECT / INSERT / UPDATE",
+          "Objetivo",
+          "Reducir el blast radius si una cuenta es comprometida.",
+          "6"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 7,
+        "paragraphs": [
+          "Datos, secretos y cifrado",
+          "No hacer",
+          "DB_PASSWORD = “MiPassword123”API keys, tokens o certificados dentro del código o repositorio.",
+          "Mejor práctica",
+          "Usar un gestor de secretos y una identidad autorizada para recuperarlos en tiempo de ejecución.",
+          "En reposo",
+          "Discos · bases · backups · object storage",
+          "En tránsito",
+          "HTTPS/TLS entre cliente, servicios y APIs",
+          "En uso",
+          "Datos mientras son procesados por la aplicación",
+          "7"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 8,
+        "paragraphs": [
+          "Arquitectura de red: reducir exposición",
+          "Internet",
+          "WAF/CDN",
+          "Balanceador",
+          "Aplicaciónprivada",
+          "Base de datosprivada",
+          "• No publicar recursos que no necesitan Internet.",
+          "• Segmentar redes y restringir origen/destino.",
+          "• Usar firewall / security groups y WAF.",
+          "• Separar capas web, aplicación y datos.",
+          "8"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 9,
+        "paragraphs": [
+          "DevSecOps: seguridad durante todo el ciclo",
+          "CODE",
+          "SASTSecret scanning",
+          "BUILD",
+          "DependenciasContenedores",
+          "TEST",
+          "DASTPruebas",
+          "DEPLOY",
+          "IaCPolíticas",
+          "MONITOR",
+          "LogsAlertas",
+          "Shift Left: encontrar problemas antes cuesta menos que corregirlos en producción.",
+          "9"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 10,
+        "paragraphs": [
+          "Herramientas: pensar primero en la necesidad",
+          "Necesidad",
+          "AWS",
+          "Azure",
+          "Google Cloud",
+          "Identidad / permisos",
+          "AWS IAM",
+          "Microsoft Entra ID / Azure RBAC",
+          "Cloud IAM",
+          "Secretos",
+          "Secrets Manager",
+          "Key Vault",
+          "Secret Manager",
+          "Claves / cifrado",
+          "AWS KMS",
+          "Key Vault",
+          "Cloud KMS",
+          "WAF",
+          "AWS WAF",
+          "Azure WAF",
+          "Cloud Armor",
+          "Postura de seguridad",
+          "Security Hub",
+          "Defender for Cloud",
+          "Security Command Center",
+          "Logs / auditoría",
+          "CloudTrail / CloudWatch",
+          "Azure Monitor",
+          "Cloud Logging / Audit Logs",
+          "10"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 11,
+        "paragraphs": [
+          "10 mejores prácticas para llevarse de la clase",
+          "1",
+          "MFA",
+          "2",
+          "Mínimo privilegio",
+          "3",
+          "No compartir cuentas",
+          "4",
+          "Secretos fuera del código",
+          "5",
+          "Cifrar datos",
+          "6",
+          "Reducir exposición",
+          "7",
+          "Actualizar dependencias",
+          "8",
+          "Centralizar logs",
+          "9",
+          "Seguridad en CI/CD",
+          "10",
+          "Probar backups",
+          "11"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 12,
+        "paragraphs": [
+          "Actividad integradora: Campus Cloud",
+          "En grupos: detecten al menos 6 problemas y propongan controles.",
+          "Password de BD dentro del código",
+          "Todos los desarrolladores son ADMIN",
+          "No hay MFA",
+          "Base de datos con IP pública",
+          "Logs retenidos solo 24 h",
+          "Hay backup, pero nunca se restauró",
+          "Completar: Problema → Riesgo → Control recomendado",
+          "12"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 13,
+        "paragraphs": [
+          "Cierre: seguridad por diseño",
+          "APLICACIÓNCLOUD",
+          "Identidades",
+          "Red",
+          "Datos",
+          "Logs",
+          "Backups",
+          "Código",
+          "Secretos",
+          "CI/CD",
+          "La seguridad cloud no se agrega al final: se diseña desde el comienzo.",
+          "13"
+        ],
+        "notes": [],
+        "images": []
+      },
+      {
+        "number": 14,
+        "paragraphs": [
+          "Referencias para profundizar",
+          "• AWS — Shared Responsibility Model y Security Pillar.",
+          "• Microsoft Learn — Shared responsibility in the cloud.",
+          "• Google Cloud — Shared responsibility / shared fate y Security overview.",
+          "• OWASP — recursos de seguridad de aplicaciones y cloud native.",
+          "Sugerencia docente: usar la hoja de ejercicios al finalizar la presentación como evaluación formativa.",
+          "14"
+        ],
+        "notes": [],
+        "images": []
+      }
+    ]
+  }
+]
