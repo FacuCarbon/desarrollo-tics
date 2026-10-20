@@ -126,7 +126,7 @@ function ReadingSection({ number, title, items }: { number: string; title: strin
 
 function ExamNote({ onPlan }: { onPlan: () => void }) {
   const { examDate, days } = useCloudExamTiming()
-  return <section className="exam-note"><div className="note-rule" /><p className="eyebrow">Próximo parcial</p><h3>{deadlineLabel(days)}</h3><p>{formatStudyDate(examDate)}</p><button className="text-button" onClick={onPlan}>Organizar mi estudio <NotebookIcon name="arrow" size={16} /></button></section>
+  return <section className="exam-note"><div className="note-rule" /><p className="eyebrow">Próximo parcial</p><h3>{deadlineLabel(days)}</h3><p>{formatStudyDate(examDate, true)}</p><button className="text-button" onClick={onPlan}>Organizar mi estudio <NotebookIcon name="arrow" size={16} /></button></section>
 }
 
 function ExamSetup({ quiz, subject }: { quiz: NotebookQuiz; subject: StudySubject }) {

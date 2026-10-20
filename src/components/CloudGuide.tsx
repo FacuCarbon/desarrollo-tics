@@ -107,8 +107,9 @@ function StudyPlan({ onStudy, onQuiz }: { onStudy: (id: string) => void; onQuiz:
   return <div className="space-y-4">
     <div className={panelClass}>
       <h3 className="text-xl font-bold text-[var(--accent)]">{deadlineLabel(daysLeft)}</h3>
-      <label className="block space-y-2 text-sm"><span>Fecha del parcial</span><input type="date" className={inputClass} value={examDate} onChange={(event) => setExamDate(event.target.value)} /></label>
-      <p className="text-sm text-[var(--muted)]">Fecha inicial estimada: 24 de octubre de 2026, a partir del plazo indicado. Corregila si hace falta. El plazo se actualiza con la fecha de Buenos Aires.</p>
+      <ExamDateEditor key={examDate} examDate={examDate} onSave={setExamDate} />
+      <p role="status" className="text-sm text-[var(--accent)]">Fecha aplicada: {formatStudyDate(examDate, true)}. El contador y el plan usan esta fecha.</p>
+      <p className="text-sm text-[var(--muted)]">El plazo se actualiza con la fecha de Buenos Aires. La fecha se conserva en este navegador y se incluye en tu copia de avance.</p>
       <p className="text-sm leading-7 text-[var(--muted)]">{daysLeft > 0 ? 'Las etapas pendientes se distribuyen desde hoy hasta el día anterior al parcial. Si queda menos tiempo, se agrupan sin quitar temas.' : daysLeft === 0 ? 'Hoy priorizá repaso, tablas y errores frecuentes según el tiempo que tengas antes de rendir. Las etapas pendientes quedan disponibles.' : 'Actualizá la fecha para organizar otro parcial. Podés seguir estudiando y conservar tu avance.'}</p>
     </div>
     <p className="text-[var(--muted)]">Avance: {done.filter((id) => ['0', '1', '2', '3'].includes(id)).length}/4 etapas completadas. Usá bloques de 45 minutos con pausas; ajustá la cantidad a tu tiempo. La prioridad es una secuencia de aprendizaje, no una predicción de qué van a tomar.</p>
@@ -119,6 +120,16 @@ function StudyPlan({ onStudy, onQuiz }: { onStudy: (id: string) => void; onQuiz:
       <div className="flex flex-wrap gap-2">{day.modules.map((id) => <button className="rounded-xl border border-[var(--line)] px-3 py-2 text-sm" key={id} onClick={() => onStudy(id)}>Estudiar {cloudModules.find((m) => m.id === id)?.shortLabel}</button>)}<button className={buttonClass} onClick={() => onQuiz(day.modules.length === 1 ? day.modules[0] : 'all')}>Practicar {day.modules.length === 1 ? 'el bloque' : 'examen mixto'}</button></div>
     </article>)}
   </div>
+}
+
+function ExamDateEditor({ examDate, onSave }: { examDate: string; onSave: (value: string) => void }) {
+  const [draft, setDraft] = useState(examDate)
+  const changed = draft !== examDate
+  return <form className="exam-date-editor" onSubmit={(event) => { event.preventDefault(); if (draft) onSave(draft) }}>
+    <label className="block space-y-2 text-sm"><span>Fecha del parcial</span><input type="date" className={inputClass} required min="2000-01-01" max="2100-12-31" defaultValue={examDate} onChange={(event) => setDraft(event.target.value)} aria-describedby="exam-date-help" /></label>
+    <button className={buttonClass} type="submit" disabled={!changed || !draft}>Guardar fecha</button>
+    <p id="exam-date-help" role="status" className="text-sm text-[var(--muted)]">{changed ? 'Cambio pendiente. Guardá la fecha para actualizar el contador y reorganizar las etapas pendientes.' : 'La fecha aplicada aparece debajo. Podés cambiarla y guardar otra.'}</p>
+  </form>
 }
 
 function Table({ caption, headings, rows }: { caption: string; headings: string[]; rows: string[][] }) {

@@ -126,6 +126,9 @@ summary { min-height:36px;padding-block:6px;line-height:1.5 }
 .progress-summary p { color:var(--muted);font-size:12px;line-height:1.7;margin-top:12px }
 .progress-summary-track .progress-line { height:5px }
 .plan-section { margin-top:15px }
+.exam-date-editor { display:flex;flex-wrap:wrap;align-items:end;gap:12px }
+.exam-date-editor > label { flex:1;min-width:min(100%,210px) }
+.exam-date-editor > p { flex-basis:100%;line-height:1.8 }
 .reading-page { max-width:770px;margin:auto }
 .reading-breadcrumb { display:flex;align-items:center;gap:13px;font-size:11px;color:var(--muted);margin:-9px 0 28px }
 .reading-breadcrumb .text-button { font-size:11px }

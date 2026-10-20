@@ -22,7 +22,7 @@ const { studySubjects } = load('src/data/subjects.ts')
 const { cloudSubject, cloudCases } = load('src/data/cloudContent.ts')
 const { createQuizAttempt, createDistinctQuizAttempt } = load('src/lib/quiz.ts')
 const sources = load('src/data/cloudSources.json')
-const { calendarDate, daysUntilExam, deadlineLabel, schedulePendingStages, isCalendarDate } = load('src/lib/studySchedule.ts')
+const { calendarDate, daysUntilExam, deadlineLabel, schedulePendingStages, isCalendarDate, defaultCloudExamDate } = load('src/lib/studySchedule.ts')
 const { evaluateCaseModel, changedCaseAlternatives } = load('src/lib/cloudPractice.ts')
 const { restoreSession, serializeSession, validateProgressBackup, compatibleValue } = load('src/lib/progressStorage.ts')
 
@@ -87,6 +87,9 @@ test('case correction accepts supported alternatives instead of imposing a uniqu
 })
 
 test('deadline follows Buenos Aires calendar dates, including midnight and exam day', () => {
+  assert.equal(defaultCloudExamDate, '2026-10-23')
+  assert.equal(new Date(`${defaultCloudExamDate}T12:00:00Z`).getUTCDay(), 5)
+  assert.equal(daysUntilExam(defaultCloudExamDate, '2026-10-20'), 3)
   assert.equal(calendarDate(new Date('2026-10-21T02:59:59Z')), '2026-10-20')
   assert.equal(calendarDate(new Date('2026-10-21T03:00:00Z')), '2026-10-21')
   for (const [today, expected] of [['2026-10-20', 4], ['2026-10-21', 3], ['2026-10-22', 2], ['2026-10-23', 1], ['2026-10-24', 0], ['2026-10-25', -1]]) {

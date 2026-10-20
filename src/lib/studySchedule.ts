@@ -1,4 +1,4 @@
-export const defaultCloudExamDate = '2026-10-24'
+export const defaultCloudExamDate = '2026-10-23'
 
 export function calendarDate(now = new Date()) {
   const parts = new Intl.DateTimeFormat('en-CA', {
@@ -25,8 +25,8 @@ export function deadlineLabel(days: number) {
   if (days === 1) return 'El parcial es mañana'
   return `Faltan ${days} días para el parcial`
 }
-export function formatStudyDate(date: string) {
-  return new Intl.DateTimeFormat('es-AR', { timeZone: 'UTC', day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(dateNumber(date)))
+export function formatStudyDate(date: string, includeWeekday = false) {
+  return new Intl.DateTimeFormat('es-AR', { timeZone: 'UTC', weekday: includeWeekday ? 'long' : undefined, day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(dateNumber(date)))
 }
 export function schedulePendingStages(today: string, examDate: string, completed: string[]) {
   const pending = [0, 1, 2, 3].filter((index) => !completed.includes(String(index)))
